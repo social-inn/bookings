@@ -6,7 +6,9 @@ import css from '../../../public/dist/App.css';
 
 const GuestPicker = (props) => {
   const {
-    guest,
+    maxAdults,
+    maxChildren,
+    maxInfants,
     adults,
     numChildren,
     infants,
@@ -15,8 +17,6 @@ const GuestPicker = (props) => {
     decreaseGuest,
     guestExpandToggle,
   } = props;
-
-  const maxGuests = JSON.parse(guest);
 
   return (
     <ClickOutsideOfGuestPicker clickOutsideOfGuestPicker={clickOutsideOfGuestPicker}>
@@ -27,7 +27,7 @@ const GuestPicker = (props) => {
             <div className={css.buttonSection}>
               <button type="submit" className={css.adults} id="adults" disabled={adults === 1} onClick={decreaseGuest}>- </button>
               <div className={css.countAdults}>{adults}</div>
-              <button type="submit" className={css.adults} id="adults" disabled={adults === maxGuests.adults} onClick={increaseGuest}> + </button>
+              <button type="submit" className={css.adults} id="adults" disabled={adults === maxAdults} onClick={increaseGuest}> + </button>
             </div>
           </div>
           <div />
@@ -38,7 +38,7 @@ const GuestPicker = (props) => {
             <div className={css.buttonSection}>
               <button type="submit" className={css.children} id="children" disabled={numChildren === 0} onClick={decreaseGuest}>-</button>
               <div className={css.count}>{numChildren}</div>
-              <button type="submit" className={css.children} id="children" disabled={numChildren === maxGuests.children} onClick={increaseGuest}>+</button>
+              <button type="submit" className={css.children} id="children" disabled={numChildren === maxChildren} onClick={increaseGuest}>+</button>
             </div>
           </div>
           <div className={css.guestTypeInfo}>Ages 2-12</div>
@@ -48,15 +48,15 @@ const GuestPicker = (props) => {
             <div className={css.buttonSection}>
               <button type="submit" className={css.infants} id="infants" disabled={infants === 0} onClick={decreaseGuest}>-</button>
               <div className={css.count}>{infants}</div>
-              <button type="submit" className={css.infants} id="infants" disabled={infants === maxGuests.infants} onClick={increaseGuest}>+</button>
+              <button type="submit" className={css.infants} id="infants" disabled={infants === maxInfants} onClick={increaseGuest}>+</button>
             </div>
           </div>
           <div className={css.guestTypeInfo}>Under 2</div>
         </div>
         <br />
         <div>
-          {`${maxGuests.adults} guest maximum. `}
-          {`${maxGuests.children} children and ${maxGuests.infants} infants are allowed in this room.`}
+          {`${maxAdults} guest maximum. `}
+          {`${maxChildren} children and ${maxInfants} infants are allowed in this room.`}
         </div>
         <button type="submit" className={css.close} onClick={guestExpandToggle}>Close</button>
       </div>
@@ -65,7 +65,9 @@ const GuestPicker = (props) => {
 };
 
 GuestPicker.propTypes = {
-  guest: PropTypes.string,
+  maxAdults: PropTypes.number,
+  maxChildren: PropTypes.number,
+  maxInfants: PropTypes.number,
   adults: PropTypes.number,
   numChildren: PropTypes.number,
   infants: PropTypes.number,
@@ -76,11 +78,13 @@ GuestPicker.propTypes = {
 };
 
 GuestPicker.defaultProps = {
-  guest: '',
+  maxAdults: 1,
+  maxChildren: 1,
+  maxInfants: 1,
   adults: 0,
   numChildren: 0,
   infants: 0,
-  clickOutsideOfGuestPicker: () => {},
+  clickOutsideOfGuestPicker: () => { },
   increaseGuest: () => { },
   decreaseGuest: () => { },
   guestExpandToggle: () => { },

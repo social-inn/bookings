@@ -51,8 +51,6 @@ export default class BookingSummary extends React.Component {
     const divStyle = {
       height: '16px', width: '16px', display: 'block', fill: 'rgb(118, 118, 118)',
     };
-    const rating = parseFloat(ratings);
-    const starsWidth = rating * 10;
     return (
       <div className={css.popup}>
         <div className={css.popup_inner}>
@@ -66,7 +64,7 @@ export default class BookingSummary extends React.Component {
           </button>
           <form onSubmit={this.handleClick}>
             <label htmlFor="email" className={css.email}>
-            Email:
+              Email:
               <input style={{ width: '70%', height: '15px' }} type="text" name="email" value={email} onChange={this.handleChange} />
             </label>
           </form>
@@ -76,7 +74,7 @@ export default class BookingSummary extends React.Component {
             <div className={css.secondLine}>
               <div className={css.ratings}>
                 <span className={css.outerStar}>
-                  <span className={css.innerStar} style={{ width: `${starsWidth}px` }} />
+                  <span className={css.innerStar} style={{ width: `${ratings}px` }} />
                 </span>
                 {' '}
               </div>
@@ -181,7 +179,7 @@ BookingSummary.propTypes = {
   price: PropTypes.number,
   selectedNights: PropTypes.string,
   closeBookingPopup: PropTypes.func,
-  ratings: PropTypes.string,
+  ratings: PropTypes.number,
   reviews: PropTypes.number,
 };
 
@@ -199,6 +197,6 @@ BookingSummary.defaultProps = {
   price: 0,
   selectedNights: '',
   closeBookingPopup: () => { },
-  ratings: '',
+  ratings: 0,
   reviews: 0,
 };

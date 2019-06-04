@@ -225,28 +225,23 @@ export default class Form extends React.Component {
     const {
       checkIn, checkOut, adults, children, infants,
     } = this.state;
-    let guests = {
+    const checkInDate = moment(checkIn, 'MM/DD/YYYY').format();
+    const checkOutDate = moment(checkOut, 'MM/DD/YYYY').format();
+    const data = {
+      check_in: checkInDate,
+      check_out: checkOutDate,
       adults,
       children,
       infants,
-    };
-    guests = JSON.stringify(guests);
-    const checkInDate = moment(checkIn, 'MM/DD/YYYY').format();
-    const checkOutDate = moment(checkOut, 'MM/DD/YYYY').format();
-    let value = {
-      check_in: checkInDate,
-      check_out: checkOutDate,
-      guests,
       email,
       roomId,
       createdAt: moment().format(),
     };
-    value = JSON.stringify(value);
     $.ajax({
       url: `/booking?id=${roomId}`,
       type: 'POST',
       contentType: 'application/json',
-      data: value,
+      data: JSON.stringify(data),
       success: (err, result) => {
         if (result === 'success') {
           this.formInitialize();
@@ -319,7 +314,9 @@ export default class Form extends React.Component {
 
     const {
       bookedDates,
-      guest,
+      maxAdults,
+      maxChildren,
+      maxInfants,
       price,
       cleaningFee,
       serviceFee,
@@ -359,7 +356,9 @@ export default class Form extends React.Component {
               handleBothUnclicked={this.handleBothUnclicked}
             />
             <Guest
-              guest={guest}
+              maxAdults={maxAdults}
+              maxChildren={maxChildren}
+              maxInfants={maxInfants}
               adults={adults}
               numChildren={children}
               infants={infants}
@@ -416,7 +415,9 @@ export default class Form extends React.Component {
 }
 
 Form.propTypes = {
-  guest: PropTypes.string,
+  maxAdults: PropTypes.number,
+  maxChildren: PropTypes.number,
+  maxInfants: PropTypes.number,
   price: PropTypes.number,
   cleaningFee: PropTypes.number,
   serviceFee: PropTypes.number,
@@ -427,11 +428,13 @@ Form.propTypes = {
   roomId: PropTypes.number,
   roomname: PropTypes.string,
   reviews: PropTypes.number,
-  ratings: PropTypes.string,
+  ratings: PropTypes.number,
 };
 
 Form.defaultProps = {
-  guest: '',
+  maxAdults: 0,
+  maxChildren: 0,
+  maxInfants: 0,
   price: 0,
   cleaningFee: 0,
   serviceFee: 0,
@@ -442,5 +445,5 @@ Form.defaultProps = {
   roomId: 1,
   roomname: '',
   reviews: 0,
-  ratings: '',
+  ratings: 0,
 };

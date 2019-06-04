@@ -4,14 +4,12 @@ import css from '../../../public/dist/App.css';
 
 const Info = (props) => {
   const { price, ratings, reviews } = props;
-  const rating = parseFloat(ratings);
-  const starsWidth = rating * 10;
 
   return (
     <div className={css.roomInfo}>
       <div className={css.firstLine}>
         <div className={css.price}>
-$
+          $
           {price}
         </div>
         {' '}
@@ -19,16 +17,16 @@ $
       </div>
       <div className={css.secondLine}>
         <div className={
-    css.ratings}
+          css.ratings}
         >
           <span className={css.outerStar}>
-            <span className={css.innerStar} style={{ width: `${starsWidth}px` }} />
+            <span className={css.innerStar} style={{ width: `${ratings}px` }} />
           </span>
           {' '}
         </div>
         {' '}
         <div className={
-    css.reviews}
+          css.reviews}
         >
           {reviews}
 
@@ -41,13 +39,13 @@ $
 
 Info.propTypes = {
   price: PropTypes.number,
-  ratings: PropTypes.string,
+  ratings: PropTypes.number,
   reviews: PropTypes.number,
 };
 
 Info.defaultProps = {
   price: 0,
-  ratings: '',
+  ratings: 0,
   reviews: 0,
 };
 

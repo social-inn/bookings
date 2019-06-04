@@ -1,24 +1,19 @@
 const webpack = require('webpack');
-
 const path = require('path');
 const CompressionPlugin = require('compression-webpack-plugin');
 
-const SRC_DIR = path.join(__dirname, '/client/src');
-const DIST_DIR = path.join(__dirname, '/public/dist');
-
 module.exports = {
-  entry: `${SRC_DIR}/index.jsx`,
+  mode: 'production',
+  entry: './client/src/index.jsx',
   output: {
+    path: path.resolve(__dirname, './public/dist'),
     filename: 'bundle.js',
-    path: DIST_DIR,
   },
   module: {
     rules: [
       {
         test: [/\.js$/, /\.jsx?$/],
-        // 'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
         exclude: /node_modules/,
-        include: SRC_DIR,
         loader: 'babel-loader',
         query: {
           presets: ['@babel/preset-react', '@babel/preset-env'],
@@ -40,7 +35,6 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-  mode: 'production',
   plugins: [
     new webpack.DefinePlugin({ // <-- key to reducing React's size
       'process.env': {

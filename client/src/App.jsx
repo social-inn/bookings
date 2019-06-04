@@ -17,10 +17,12 @@ export default class App extends React.Component {
         cleaningFee: 0,
         serviceFee: 0,
         tax: 0,
-        maxGuest: '',
-        minNight: 0,
-        maxNight: 0,
-        ratings: '',
+        maxAdults: 0,
+        maxChildren: 0,
+        maxInfants: 0,
+        minNights: 0,
+        maxNights: 0,
+        ratings: 0,
         numReviews: 0,
       },
       bookedDates: [],
@@ -119,18 +121,7 @@ export default class App extends React.Component {
 
   updateRoomState(result) {
     this.setState({
-      roomInfo: {
-        roomname: result.roomname,
-        price: result.price,
-        cleaningFee: result.cleaning_fee,
-        serviceFee: result.service_fee,
-        tax: result.tax,
-        maxGuest: result.max_guest,
-        minNight: result.min_night,
-        maxNight: result.max_night,
-        ratings: result.ratings,
-        numReviews: result.num_reviews,
-      },
+      roomInfo: result,
     });
   }
 
@@ -159,13 +150,15 @@ export default class App extends React.Component {
         <div className={css.dividingSection} />
         <div>
           <Form
-            guest={roomInfo.maxGuest}
+            maxAdults={roomInfo.maxAdults}
+            maxChildren={roomInfo.maxChildren}
+            maxInfants={roomInfo.maxInfants}
             price={roomInfo.price}
             cleaningFee={roomInfo.cleaningFee}
             serviceFee={roomInfo.serviceFee}
             tax={roomInfo.tax}
-            minNight={roomInfo.minNight}
-            maxNight={roomInfo.maxNight}
+            minNights={roomInfo.minNights}
+            maxNights={roomInfo.maxNights}
             bookedDates={bookedDates}
             roomId={roomId}
             roomname={roomInfo.roomname}

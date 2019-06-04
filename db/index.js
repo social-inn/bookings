@@ -1,13 +1,17 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('booking', 'root', null, {
+const sequelize = new Sequelize('booking', 'root', 'eugenia', {
   host: 'localhost',
   dialect: 'mysql',
 });
 
 
 const Room = sequelize.define('rooms', {
-  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
   roomname: Sequelize.STRING,
   price: Sequelize.INTEGER,
   cleaning_fee: Sequelize.INTEGER,
@@ -44,6 +48,7 @@ Room.sync();
 Booking.sync();
 
 module.exports = {
+  sequelize,
   Room,
   Booking,
 };

@@ -10,9 +10,9 @@ services:
       - '3333:3333'
 
   database:
-    build: ./booking
+    build: ./db
     environment:
-      MYSQL_ROOT_PASSWORD: 'yerin'
+      MYSQL_ROOT_PASSWORD: 'eugenia'
       MYSQL_DATABASE: 'booking'
     healthcheck:
       test: ['CMD', "mysqladmin", "ping", "-h", "localhost"]

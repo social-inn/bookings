@@ -1,14 +1,15 @@
 {
-  "name": "Airbnb-booking",
+  "name": "social-inn-booking",
   "version": "1.0.0",
-  "description": "> Airbnb Booking module",
+  "description": "> Social Inn Bookings module",
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage",
     "start": "nodemon server/index.js",
     "build": "webpack --config webpack.config.prod.js",
+    "build:p": "webpack -p",
     "react-dev": "webpack -d --watch",
-    "seed": "mysql -u root <db/schema.sql && node db/room_generater.js && db/booking_generater.js"
+    "seed": "mysql -u root < db/schema.sql && node db/room_generator.js && db/booking_generator.js"
   },
   "lint-staged": {
     "*.js": [
@@ -24,15 +25,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hacker-home/Airbnb-booking.git"
+    "url": "git+https://github.com/social-inn/bookings.git"
   },
   "keywords": [],
-  "author": "Yerin Cha",
+  "author": "eugenia ong",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hacker-home/Airbnb-booking/issues"
+    "url": "https://github.com/social-inn/bookings/issues"
   },
-  "homepage": "https://github.com/hacker-home/Airbnb-booking#readme",
+  "homepage": "https://github.com/social-inn/bookings#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
