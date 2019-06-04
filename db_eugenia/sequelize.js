@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('bookings', 'root', 'eugenia', {
-  host: '172.17.0.2',
+const sequelize = new Sequelize('booking', 'root', 'eugenia', {
+  host: 'localhost',
   dialect: 'mysql',
 });
 
@@ -25,13 +25,6 @@ const Room = sequelize.define('room', {
 });
 
 const Booking = sequelize.define('booking', {
-  roomId: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: Room,
-      key: 'id',
-    },
-  },
   email: Sequelize.STRING,
   adults: Sequelize.INTEGER,
   children: Sequelize.INTEGER,

@@ -15,7 +15,7 @@ const fakeDataRoom = {
   min_night: 1,
   num_reviews: 6,
   price: 76,
-  ratings: '4.6',
+  ratings: 46,
   roomname: "Viva Funk's Loft",
   service_fee: 5,
   tax: 10,
