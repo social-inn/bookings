@@ -37,7 +37,7 @@ const generateBookings = (n) => {
     const end = '2019-12-31';
     for (let j = 0; j < bookingsPerRoom; j += 1) {
       const numOfDays = faker.random.number({ min: 2, max: 10 });
-      const checkIn = faker.date.between(start, end);
+      const checkIn = faker.date.between(start, end).setHours(0, 0, 0, 0);
       const checkOut = moment(checkIn).clone().add(numOfDays, 'days').toDate();
       const booking = {
         id,

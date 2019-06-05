@@ -1,33 +1,197 @@
-# Airbnb-booking
+# Social Inn Bookings
 
-> Airbnb Booking module
+> Module for booking a room on housing reservation website
 
 ## Related Projects
 
-  - https://github.com/hacker-home/Airbnb-more-homes
-  - https://github.com/hacker-home/Airbnb-info
-  - https://github.com/hacker-home/Airbnb-reviews
-  - https://github.com/hacker-home/Airbnb-photos
-
-My proxy server is here!
-
-https://github.com/hacker-home/Airbnb-booking-proxy
+- https://github.com/social-inn/Recommeded-homes
+- https://github.com/social-inn/socialinn-proxy-eugenia
 
 ## Usage
 
-> This module is a booking portal on Airbnb listing page
+> "npm install" to install necessary dependencies
+> "npm run build" to bundle webpack files
+> run "mysql -u root < db_eugenia/schema.sql -p" in CLI and enter password to create database
+> run "npm start" to start server running on port 3000
 
-If you have any questions or feedback, please feel free to contact me!
+## RESTful API Routes
 
-## Requirements
+1. GET
+2. POST
+3. PUT
+4. DELETE
 
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
+### GET
 
-- Node 6.13.0
-- MySQL
-- Webpack
-- React
+Endpoint: ```/rooms/:id/basicinfo```
+Success Response: An object containing information about a room with param ```id```
+  * Code: 200
+  * Data Shape: Object
+  * Content:
 
+```sh
+{
+    "id": 1,
+    "roomname": "Alphonso Fahey's House",
+    "price": 1167,
+    "cleaningFee": 39,
+    "serviceFee": 1272,
+    "maxAdults": 10,
+    "maxChildren": 4,
+    "maxInfants": 5,
+    "minNights": 7,
+    "maxNights": 49,
+    "ratings": 32,
+    "numReviews": 65,
+    "createdAt": "2019-06-05T00:04:55.000Z",
+    "updatedAt": "2019-06-05T00:04:55.000Z"
+}
+
+```
+Error Response: 
+  * Code: 500
+  * Content: [TODO: FILL UP ERROR MESSAGE]
+
+Endpoint: ```/rooms/:id/bookings```
+Success Response: An array of objects containing all the bookings a room with param ```id``` has. Each object represents a booking that has been made for that room.
+  * Code: 200
+  * Data Shape: Array of Objects
+  * Content:
+
+ ```sh
+[
+    {
+        "id": 1,
+        "email": "Allen.Satterfield16@yahoo.com",
+        "adults": 3,
+        "children": 1,
+        "infants": 0,
+        "checkIn": "2019-09-08T05:11:19.000Z",
+        "checkOut": "2019-09-11T05:11:19.000Z",
+        "createdAt": "2019-06-05T00:04:55.000Z",
+        "updatedAt": "2019-06-05T00:04:55.000Z",
+        "roomId": 1
+    },
+    {
+        "id": 2,
+        "email": "Kieran47@hotmail.com",
+        "adults": 3,
+        "children": 0,
+        "infants": 2,
+        "checkIn": "2019-09-13T18:26:40.000Z",
+        "checkOut": "2019-09-19T18:26:40.000Z",
+        "createdAt": "2019-06-05T00:04:55.000Z",
+        "updatedAt": "2019-06-05T00:04:55.000Z",
+        "roomId": 1
+    },
+
+``` 
+
+### POST
+
+##### CREATING A NEW ROOM RECORD
+Endpoint: ```/rooms```
+Expected Data Shape: Object in application/json format
+Example: 
+  ```sh
+{ roomname: 'My Nice Home',
+  price: 30,
+  cleaningFee: 30,
+  serviceFee: 20,
+  maxAdults: 4,
+  maxChildren: 2,
+  maxInfants: 5,
+  minNights: 4,
+  maxNights: 20,
+  ratings: 45,
+  numReviews: 40
+}
+  ```
+
+Success Response:
+  * Code: 201
+
+Error Response:
+  * Code: 500
+
+##### CREATING A NEW BOOKING FOR A ROOM
+Endpoint: ```/bookings```
+Expected Data Shape: Object in application/json format
+Example: 
+  ```sh
+{
+  "email": "Marquis_McClure@gmail.com",
+  "adults": 2,
+  "children": 0,
+  "infants": 2,
+  "checkIn": "2019-08-03T07:00:00.000Z",
+  "checkOut": "2019-08-05T07:00:00.000Z",
+  "roomId": 1
+}
+  ```
+
+Success Response:
+  * Code: 201
+
+Error Response:
+  * Code: 403 (Booking Conflict)
+  * Code: 500 (Server Error)
+
+### PUT
+
+##### UPDATING A NEW ROOM RECORD
+Endpoint: ```/rooms```
+Expected Data Shape: Object with updated information in application/json format 
+Example: 
+  ```sh
+{ 
+  id: 1,
+  roomname: 'My Nice Home',
+  price: 10,
+  cleaningFee: 10,
+  serviceFee: 30,
+  maxAdults: 8,
+  maxChildren: 2,
+  maxInfants: 2,
+  minNights: 4,
+  maxNights: 10,
+  ratings: 10,
+  numReviews: 200
+}
+  ```
+
+Success Response:
+  * Code: 201
+
+Error Response:
+  * Code: 500
+
+##### UPDATING A BOOKING FOR A ROOM
+Endpoint: ```/bookings```
+Expected Data Shape: Object with updated information in application/json format
+Example: 
+  ```sh
+{
+  "id": 20,
+  "email": "Marquis_McClure@gmail.com",
+  "adults": 4,
+  "children": 0,
+  "infants": 2,
+  "checkIn": "2019-08-03T07:00:00.000Z",
+  "checkOut": "2019-08-05T07:00:00.000Z",
+  "roomId": 1
+}
+  ```
+
+Success Response:
+  * Code: 201
+
+Error Response:
+  * Code: 403 (Booking Conflict, Cannot be amended)
+  * Code: 500 (Server Error)
+
+
+### DELETE
 
 ## Deploying
 

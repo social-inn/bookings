@@ -1,8 +1,10 @@
 const Sequelize = require('sequelize');
 
+const { Op } = Sequelize;
 const sequelize = new Sequelize('booking', 'root', 'eugenia', {
   host: 'localhost',
   dialect: 'mysql',
+  logging: false,
 });
 
 const Room = sequelize.define('room', {
@@ -34,10 +36,12 @@ const Booking = sequelize.define('booking', {
   createdAt: Sequelize.DATE,
 });
 
+
 Room.hasMany(Booking);
 
 module.exports = {
   sequelize,
   Room,
   Booking,
+  Op,
 };

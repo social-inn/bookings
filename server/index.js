@@ -2,11 +2,10 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const db = require('../db/index.js');
-
+const db = require('../db_eugenia/sequelize');
 
 const app = express();
-const port = 3333;
+const port = 3000;
 app.use(express.static(path.join(__dirname, '../public/dist')));
 app.use(bodyParser.json());
 app.use(cors());
@@ -17,26 +16,23 @@ app.use(cors());
 //   next();
 // });
 
-app.get('/room', (req, res) => {
-  db.Room.findAll({
-    where: {
-      id: req.query.id,
-    },
-  })
+// GET
+app.get('/rooms/:id/basicinfo', (req, res) => {
+  db.Room.findOne({ where: { id: req.params.id } })
     .then((result) => {
-      res.send(result[0].dataValues);
+      if (result) {
+        res.send(result);
+      } else {
+        res.sendStatus(404);
+      }
     })
     .catch(() => {
       res.sendStatus(500);
     });
 });
 
-app.get('/booking', (req, res) => {
-  db.Booking.findAll({
-    where: {
-      roomId: req.query.id,
-    },
-  })
+app.get('/rooms/:id/bookings', (req, res) => {
+  db.Booking.findAll({ where: { roomId: req.params.id } })
     .then((result) => {
       res.send(result);
     })
@@ -46,27 +42,107 @@ app.get('/booking', (req, res) => {
 });
 
 
-// making booking
+// POST
 
-app.post('/booking', (req, res) => {
-  const data = {
-    roomId: req.body.roomId,
-    email: req.body.email,
-    guests: req.body.guests,
-    check_in: new Date(req.body.check_in),
-    check_out: new Date(req.body.check_out),
-    createdAt: new Date(req.body.createdAt),
-  };
-
-
-  db.Booking.create(data)
-    .catch((err) => {
-      console.log(`err: ${err}`);
-      res.sendStatus(500);
-    })
+app.post('/rooms', (req, res) => {
+  db.Room.create(req.body)
     .then(() => {
-      console.log('Booking data is saved');
-      res.sendStatus(200);
+      res.sendStatus(201);
+    })
+    .catch(() => {
+      res.sendStatus(500);
+    });
+});
+
+app.post('/bookings', (req, res) => {
+  const data = req.body;
+  data.checkIn = new Date(data.checkIn);
+  data.checkOut = new Date(data.checkOut);
+
+  db.Booking.findAll({
+    where: {
+      roomId: req.body.roomId,
+      checkIn: { [db.Op.lt]: data.checkOut },
+      checkOut: { [db.Op.gt]: data.checkIn },
+    },
+  })
+    .then((result) => {
+      if (!result[0]) {
+        return db.Booking.create(data);
+      }
+      return undefined;
+    })
+    .then((result) => {
+      if (result === undefined) {
+        res.sendStatus(403);
+      } else {
+        res.sendStatus(201);
+      }
+    })
+    .catch(() => {
+      res.sendStatus(500);
+    });
+});
+
+// PUT
+app.put('/rooms', (req, res) => {
+  db.Room.update(req.body, { where: { id: req.body.id } })
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch(() => {
+      res.sendStatus(500);
+    });
+});
+
+app.put('/bookings', (req, res) => {
+  const data = req.body;
+  data.checkIn = new Date(data.checkIn);
+  data.checkOut = new Date(data.checkOut);
+
+  db.Booking.findAll({
+    where: {
+      roomId: req.body.roomId,
+      checkIn: { [db.Op.lt]: data.checkOut },
+      checkOut: { [db.Op.gt]: data.checkIn },
+    },
+  })
+    .then((result) => {
+      if (!result[0]) {
+        return db.Booking.update(data, { where: { id: data.id } });
+      }
+      return undefined;
+    })
+    .then((result) => {
+      if (result === undefined) {
+        res.sendStatus(403);
+      } else {
+        res.sendStatus(201);
+      }
+    })
+    .catch(() => {
+      res.sendStatus(500);
+    });
+});
+
+// DELETE
+app.delete('/rooms/:id', (req, res) => {
+  db.Room.destroy({ where: { id: req.params.id } })
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch(() => {
+      res.sendStatus(500);
+    });
+});
+
+app.delete('/bookings/:id', (req, res) => {
+  db.Booking.destroy({ where: { id: req.params.id } })
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch(() => {
+      res.sendStatus(500);
     });
 });
 

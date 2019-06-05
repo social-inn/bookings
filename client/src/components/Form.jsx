@@ -227,6 +227,7 @@ export default class Form extends React.Component {
     } = this.state;
     const checkInDate = moment(checkIn, 'MM/DD/YYYY').format();
     const checkOutDate = moment(checkOut, 'MM/DD/YYYY').format();
+    // TO DO: CHECK IF I CAN FORMAT THE DATE TO DATE OBJECT AUTOMATICALLY
     const data = {
       check_in: checkInDate,
       check_out: checkOutDate,
@@ -238,7 +239,7 @@ export default class Form extends React.Component {
       createdAt: moment().format(),
     };
     $.ajax({
-      url: `/booking?id=${roomId}`,
+      url: `/rooms/${roomId}/bookings`,
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify(data),
