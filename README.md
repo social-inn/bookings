@@ -9,25 +9,28 @@
 
 ## Usage
 
-> "npm install" to install necessary dependencies
-> "npm run build" to bundle webpack files
-> run "mysql -u root < db_eugenia/schema.sql -p" in CLI and enter password to create database
-> run "npm start" to start server running on port 3000
+```npm install``` to install necessary dependencies
+```npm run build``` to bundle webpack files
+run ```mysql -u root < db_eugenia/schema.sql [-p]``` in CLI and enter password to create database
+```npm start``` to start server running on port 3000
 
 ## RESTful API Routes
 
-1. GET
-2. POST
-3. PUT
-4. DELETE
+1. [GET] (https://github.com/social-inn/bookings#get)
+2. [POST] (https://github.com/social-inn/bookings#post)
+3. [PUT] (https://github.com/social-inn/bookings#put)
+4. [DELETE] (https://github.com/social-inn/bookings#delete)
 
 ### GET
 
-Endpoint: ```/rooms/:id/basicinfo```
-Success Response: An object containing information about a room with param ```id```
+1. Rooms
+
+Endpoint: ```/rooms/:id/basicinfo```  
+
+Success Response:
+  * An object containing information about a room with param ```id```
   * Code: 200
-  * Data Shape: Object
-  * Content:
+  * Expected Content:
 
 ```sh
 {
@@ -50,13 +53,16 @@ Success Response: An object containing information about a room with param ```id
 ```
 Error Response: 
   * Code: 500
-  * Content: [TODO: FILL UP ERROR MESSAGE]
+
+2. Bookings
 
 Endpoint: ```/rooms/:id/bookings```
-Success Response: An array of objects containing all the bookings a room with param ```id``` has. Each object represents a booking that has been made for that room.
+
+Success Response: 
+  * An array of objects containing all the bookings for room with param ```id```. 
+  * Each object represents a booking that has been made for that room.
   * Code: 200
-  * Data Shape: Array of Objects
-  * Content:
+  * Expected Content:
 
  ```sh
 [
@@ -89,9 +95,12 @@ Success Response: An array of objects containing all the bookings a room with pa
 
 ### POST
 
-##### CREATING A NEW ROOM RECORD
+1. Creating a room record
+
 Endpoint: ```/rooms```
-Expected Data Shape: Object in application/json format
+
+Expected Data Input: Object in application/json format
+
 Example: 
   ```sh
 { roomname: 'My Nice Home',
@@ -114,9 +123,12 @@ Success Response:
 Error Response:
   * Code: 500
 
-##### CREATING A NEW BOOKING FOR A ROOM
+2. Creating a booking
+
 Endpoint: ```/bookings```
-Expected Data Shape: Object in application/json format
+
+Expected Data Input: Object in application/json format
+
 Example: 
   ```sh
 {
@@ -139,9 +151,12 @@ Error Response:
 
 ### PUT
 
-##### UPDATING A NEW ROOM RECORD
+1. Updating a room record
+
 Endpoint: ```/rooms```
-Expected Data Shape: Object with updated information in application/json format 
+
+Expected Data Input: Object with updated information in application/json format 
+
 Example: 
   ```sh
 { 
@@ -166,9 +181,12 @@ Success Response:
 Error Response:
   * Code: 500
 
-##### UPDATING A BOOKING FOR A ROOM
+2. Updating a booking for a room
+
 Endpoint: ```/bookings```
-Expected Data Shape: Object with updated information in application/json format
+
+Expected Data Input: Object with updated information in application/json format
+
 Example: 
   ```sh
 {
@@ -190,56 +208,25 @@ Error Response:
   * Code: 403 (Booking Conflict, Cannot be amended)
   * Code: 500 (Server Error)
 
-
 ### DELETE
 
-## Deploying
+1. Deleting a room record
 
-This module is using docker-compose for deployment.
+Endpoint: ```rooms/:id```
 
-You should check the './db/index.js' file before deploying(change the host)!
+Success Response:
+  * Code: 201
 
-And don't forget to build 'bundle.js' with webpack on production mode using the command below.
-```sh
-npm run build
-```
+Error Response:
+  * Code: 500
 
-In './booking' directory, there is a dockerFile for building the image of database
+2. Deleting a booking record
 
-When you try to deploy, run 
-```sh
-docker-compose up
-```
-from the root directory, and push those images to your docker hub.
+Endpoint: ```bookins/:id```
 
-In your instance, make another docker-compose.yml file with vim.
-```sh
-vim docker-compose.yml
-```
+Success Response:
+  * Code: 201
 
-Copy this docker-compose.yml file and change 'build' script to 'image' and change directory to the name of the images.
-
-
-### Installing Dependencies
-
-From within the root directory:
-
-```sh
-// before you run any files, please run this script
-npm install
-
-
-// to run the server (using nodemon), if you try to deploy, 
-// please change this script to use node in package.json
-npm start
-
-// build bundle.js on production mode
-npm run build
-
-// build bundle.js on development mode and watching
-npm react-dev
-
-// create database and seed
-npm run seed
-```
+Error Response:
+  * Code: 500
 
