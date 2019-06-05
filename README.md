@@ -24,9 +24,9 @@ run ```mysql -u root < db_eugenia/schema.sql [-p]``` in CLI and enter password t
 3. [PUT](#put)
 4. [DELETE](#delete)
 
-### GET
+## GET
 
-####1. Rooms
+### Rooms
 
 Endpoint: ```/rooms/:id/basicinfo```  
 
@@ -58,7 +58,7 @@ Error Response:
   * Code: 500
 
 
-####2. Bookings
+### Bookings
 
 Endpoint: ```/rooms/:id/bookings```
 
@@ -97,9 +97,9 @@ Success Response:
 
 ``` 
 
-### POST
+## POST
 
-####1. Creating a room record
+### Creating a room record
 
 Endpoint: ```/rooms```
 
@@ -128,7 +128,7 @@ Error Response:
   * Code: 500
 
 
-####2. Creating a booking
+### Creating a booking
 
 Endpoint: ```/bookings```
 
@@ -154,9 +154,9 @@ Error Response:
   * Code: 403 (Booking Conflict)
   * Code: 500 (Server Error)
 
-### PUT
+## PUT
 
-####1. Updating a room record
+### Updating a room record
 
 Endpoint: ```/rooms```
 
@@ -187,7 +187,7 @@ Error Response:
   * Code: 500
 
 
-####2. Updating a booking for a room
+### Updating a booking for a room
 
 Endpoint: ```/bookings```
 
@@ -214,9 +214,9 @@ Error Response:
   * Code: 403 (Booking Conflict, Cannot be amended)
   * Code: 500 (Server Error)
 
-### DELETE
+## DELETE
 
-####1. Deleting a room record
+### Deleting a room record
 
 Endpoint: ```rooms/:id```
 
@@ -226,7 +226,7 @@ Success Response:
 Error Response:
   * Code: 500
 
-####2. Deleting a booking record
+### Deleting a booking record
 
 Endpoint: ```bookins/:id```
 
