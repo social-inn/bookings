@@ -10,20 +10,23 @@
 ## Usage
 
 ```npm install``` to install necessary dependencies
+
 ```npm run build``` to bundle webpack files
+
 run ```mysql -u root < db_eugenia/schema.sql [-p]``` in CLI and enter password to create database
+
 ```npm start``` to start server running on port 3000
 
 ## RESTful API Routes
 
-1. [GET] (https://github.com/social-inn/bookings#get)
-2. [POST] (https://github.com/social-inn/bookings#post)
-3. [PUT] (https://github.com/social-inn/bookings#put)
-4. [DELETE] (https://github.com/social-inn/bookings#delete)
+1. [GET](#get)
+2. [POST](#post)
+3. [PUT](#put)
+4. [DELETE](#delete)
 
 ### GET
 
-1. Rooms
+####1. Rooms
 
 Endpoint: ```/rooms/:id/basicinfo```  
 
@@ -54,7 +57,8 @@ Success Response:
 Error Response: 
   * Code: 500
 
-2. Bookings
+
+####2. Bookings
 
 Endpoint: ```/rooms/:id/bookings```
 
@@ -95,7 +99,7 @@ Success Response:
 
 ### POST
 
-1. Creating a room record
+####1. Creating a room record
 
 Endpoint: ```/rooms```
 
@@ -123,7 +127,8 @@ Success Response:
 Error Response:
   * Code: 500
 
-2. Creating a booking
+
+####2. Creating a booking
 
 Endpoint: ```/bookings```
 
@@ -151,7 +156,7 @@ Error Response:
 
 ### PUT
 
-1. Updating a room record
+####1. Updating a room record
 
 Endpoint: ```/rooms```
 
@@ -181,7 +186,8 @@ Success Response:
 Error Response:
   * Code: 500
 
-2. Updating a booking for a room
+
+####2. Updating a booking for a room
 
 Endpoint: ```/bookings```
 
@@ -210,7 +216,7 @@ Error Response:
 
 ### DELETE
 
-1. Deleting a room record
+####1. Deleting a room record
 
 Endpoint: ```rooms/:id```
 
@@ -220,7 +226,7 @@ Success Response:
 Error Response:
   * Code: 500
 
-2. Deleting a booking record
+####2. Deleting a booking record
 
 Endpoint: ```bookins/:id```
 
