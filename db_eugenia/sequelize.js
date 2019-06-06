@@ -24,6 +24,7 @@ const Room = sequelize.define('room', {
   maxNights: Sequelize.INTEGER,
   ratings: Sequelize.INTEGER,
   numReviews: Sequelize.INTEGER,
+  tax: Sequelize.INTEGER,
 });
 
 const Booking = sequelize.define('booking', {

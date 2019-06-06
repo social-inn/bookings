@@ -60,20 +60,18 @@ const generateBookings = (n) => {
   return allBookings;
 };
 
-// const start = Date.now();
-const nRoomRecords = generateRooms(5);
-// const mid = Date.now();
-const nBookingRecords = generateBookings(5);
-// const end = Date.now();
-// console.log('room records took', mid - start);
-// console.log('booking records took', end - mid);
+module.exports = {
+  generateRooms,
+  generateBookings,
+};
 
+// Sequelize syncing
 db.sequelize.sync({ force: true })
   .then(() => {
-    db.Room.bulkCreate(nRoomRecords);
+    db.Room.bulkCreate(generateRooms(10000000));
   })
   .then(() => {
-    db.Booking.bulkCreate(nBookingRecords);
+    db.Booking.bulkCreate(generateBookings(10000000));
   })
   .catch((err) => {
     throw err;
