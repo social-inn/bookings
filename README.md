@@ -30,7 +30,7 @@ run ```mysql -u root < db_eugenia/schema.sql [-p]``` in CLI and enter password t
 
 Endpoint: ```/rooms/:id/basicinfo```  
 
-Success Response:
+**Success Response**:
   * An object containing information about a room with param ```id```
   * Code: 200
   * Expected Content:
@@ -54,7 +54,7 @@ Success Response:
 }
 
 ```
-Error Response: 
+**Error Response**: 
   * Code: 500
 
 
@@ -62,7 +62,7 @@ Error Response:
 
 Endpoint: ```/rooms/:id/bookings```
 
-Success Response: 
+**Success Response**: 
   * An array of objects containing all the bookings for room with param ```id```. 
   * Each object represents a booking that has been made for that room.
   * Code: 200
@@ -96,6 +96,8 @@ Success Response:
     },
 
 ``` 
+**Error Response**: 
+  * Code: 500
 
 ## POST
 
@@ -121,10 +123,10 @@ Example:
 }
   ```
 
-Success Response:
+**Success Response:**
   * Code: 201
 
-Error Response:
+**Error Response:**
   * Code: 500
 
 
@@ -147,10 +149,10 @@ Example:
 }
   ```
 
-Success Response:
+**Success Response:**
   * Code: 201
 
-Error Response:
+**Error Response:**
   * Code: 403 (Booking Conflict)
   * Code: 500 (Server Error)
 
@@ -180,10 +182,10 @@ Example:
 }
   ```
 
-Success Response:
+**Success Response:**
   * Code: 201
 
-Error Response:
+**Error Response:**
   * Code: 500
 
 
@@ -207,10 +209,10 @@ Example:
 }
   ```
 
-Success Response:
+**Success Response:**
   * Code: 201
 
-Error Response:
+**Error Response:**
   * Code: 403 (Booking Conflict, Cannot be amended)
   * Code: 500 (Server Error)
 
@@ -220,19 +222,19 @@ Error Response:
 
 Endpoint: ```rooms/:id```
 
-Success Response:
+**Success Response:**
   * Code: 201
 
-Error Response:
+**Error Response:**
   * Code: 500
 
 ### Deleting a booking record
 
-Endpoint: ```bookins/:id```
+Endpoint: ```bookings/:id```
 
-Success Response:
+**Success Response:**
   * Code: 201
 
-Error Response:
+**Error Response:**
   * Code: 500
 
