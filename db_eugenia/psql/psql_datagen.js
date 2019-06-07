@@ -1,26 +1,28 @@
+/* eslint-disable prefer-template */
 /* eslint-disable no-console */
 const faker = require('faker');
 const moment = require('moment');
 const fs = require('fs');
 
 const generateRooms = (stream, callback) => {
-  const roomNamesSuffix = ['\'s Apartment', '\'s House', '\'s Loft', '\'s Condo'];
+  const adjectives = ['\'s Cosy', '\'s Lovely', '\'s Awesome', '\'s Big', '\'s Pretty', '\'s City', '\'s Country', '\'s Beautiful', '\'s Gorgeous', '\'s Town', '\'s Stylish', '\'s Unique', '\'s Cute', '\'s Lovely', '\'s Dreamy', '\'s Cool', '\'s Luxury'];
+  const roomNamesSuffix = [' Apartment ', ' House ', ' Loft ', ' Condo ', ' Quarter ', ' Home ', ' Lodge ', ' Cottage ', ' Flat ', ' Terrace ', ' Villa ', ' Suite ', ' Penthouse ', ' Crib ', ' Studio ', ' Place ', ' Residence '];
   const createRoom = (i) => {
     const room = [
       i,
-      faker.name.findName() + faker.random.arrayElement(roomNamesSuffix),
-      faker.random.number({ min: 30, max: 1200 }),
-      faker.random.number({ min: 20, max: 100 }),
+      faker.name.findName() + faker.random.arrayElement(adjectives) + faker.random.arrayElement(roomNamesSuffix) + faker.address.stateAbbr() + ' ' + faker.address.zipCode('#####'),
+      faker.random.number({ min: 30, max: 800 }),
+      faker.random.number({ min: 20, max: 40 }),
       null,
       faker.random.number({ min: 2, max: 12 }),
       faker.random.number({ min: 2, max: 4 }),
       5,
       faker.random.number({ min: 2, max: 7 }),
-      faker.random.number({ min: 30, max: 60 }),
-      faker.random.number({ min: 0, max: 50 }),
+      faker.random.number({ min: 20, max: 30 }),
+      faker.random.number({ min: 20, max: 50 }),
       faker.random.number({ min: 0, max: 300 }),
     ];
-    room[4] = Math.round(faker.random.number({ min: 105, max: 110 }) * room[2] / 100);
+    room[4] = Math.round(faker.random.number({ min: 105, max: 110 }) * room[2] / 100) - room[2];
     room[12] = Math.round(room[2] * 0.1);
     return room.join(',');
   };
@@ -29,7 +31,7 @@ const generateRooms = (stream, callback) => {
     'id', 'roomname', 'price', 'cleaningFee', 'serviceFee', 'maxAdults',
     'maxChildren', 'maxInfants', 'minNights', 'maxNights', 'ratings', 'numReviews', 'tax'];
   let i = 0;
-  const n = 10;
+  const n = 10000000;
   const write = (cb) => {
     let ok = true;
     do {
@@ -82,7 +84,7 @@ const generateBookings = (stream, callback) => {
 
   const headers = ['id', 'roomId', 'email', 'adults', 'children', 'infants', 'checkIn', 'checkOut'];
   let i = 0;
-  const n = 10;
+  const n = 10000000;
   const write = (cb) => {
     let ok = true;
     do {
@@ -102,21 +104,26 @@ const generateBookings = (stream, callback) => {
 };
 
 const rStream = fs.createWriteStream('db_eugenia/psql/psql_rooms.csv');
-generateBookings(rStream, () => {
+generateRooms(rStream, () => {
+  console.log('done generating data for rooms!');
   rStream.end();
 });
 
-const bStream = fs.createWriteStream('db_eugenia/psql/psql_bookings.csv');
-generateBookings(bStream, () => {
-  bStream.end();
-});
+// change n to 10M
+// const bStream = fs.createWriteStream('db_eugenia/psql/psql_bookings.csv');
+// generateBookings(bStream, () => {
+//   console.log('done');
+//   bStream.end();
+// });
 
+// change n to 10
 // const bTestStream = fs.createWriteStream('db_eugenia/psql/psql_bookings_test.csv');
 // generateBookings(bTestStream, () => {
 //   bTestStream.end();
 // });
 
-// const rTestStream = fs.createWriteStream('db_eugenia/psql/psql_rooms_test.csv');
-// generateBookings(rTestStream, () => {
-//   rTestStream.end();
-// });
+// change n to 10
+const rTestStream = fs.createWriteStream('db_eugenia/psql/psql_rooms_test.csv');
+generateRooms(rTestStream, () => {
+  rTestStream.end();
+});

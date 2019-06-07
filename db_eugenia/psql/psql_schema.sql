@@ -4,7 +4,8 @@ CREATE DATABASE bookings;
 
 \c bookings;
 
-CREATE TABLE rooms (
+CREATE TABLE rooms
+(
   id SERIAL PRIMARY KEY UNIQUE,
   roomname VARCHAR(60) NOT NULL,
   price INTEGER DEFAULT 0,
@@ -20,7 +21,8 @@ CREATE TABLE rooms (
   tax INTEGER DEFAULT 0
 );
 
-CREATE TABLE bookings (
+CREATE TABLE bookings
+(
   id SERIAL PRIMARY KEY UNIQUE,
   roomId INTEGER NOT NULL,
   email VARCHAR(100) NOT NULL,
@@ -34,3 +36,6 @@ CREATE TABLE bookings (
 
 CREATE INDEX idx_roomname ON rooms(roomname);
 CREATE INDEX idx_roomid ON bookings(roomid);
+
+COPY rooms FROM '/Users/eugenia/Documents/HR/sdc-socialinn/socialinn-bookings/db_eugenia/psql/psql_rooms.csv' DELIMITER ',' CSV HEADER;
+COPY bookings FROM '/Users/eugenia/Documents/HR/sdc-socialinn/socialinn-bookings/db_eugenia/psql/psql_bookings.csv' DELIMITER ',' CSV HEADER;
