@@ -8,8 +8,7 @@
     "start": "nodemon server/index.js",
     "build": "webpack --config webpack.config.prod.js",
     "build:p": "webpack -p",
-    "react-dev": "webpack -d --watch",
-    "seed:psql": ""
+    "react-dev": "webpack -d --watch"
   },
   "lint-staged": {
     "*.js": [
@@ -47,10 +46,11 @@
     "mysql": "^2.17.1",
     "mysql2": "^1.6.5",
     "nodemon": "^1.19.0",
+    "pg": "^7.11.0",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "sequelize": "^5.8.6",
-    "prop-types": "^15.7.2"
+    "sequelize": "^5.8.6"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",

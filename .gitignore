@@ -4,5 +4,7 @@ db/dbconfig.js
 coverage/clover.xml
 coverage/lcov-report/index.html
 coverage
-db_eugenia/psql/psql_bookings.csv
-db_eugenia/psql/psql_rooms.csv
+db/psql/psql_bookings.csv
+db/psql/psql_rooms.csv
+db/cass/cass_bookings.csv
+db/cass/cass_rooms.csv
