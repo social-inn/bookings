@@ -1,0 +1,51 @@
+id,roomname,price,cleaningFee,serviceFee,maxAdults,maxChildren,maxInfants,minNights,maxNights,ratings,numReviews,tax,bookings
+1,Jena Gleichner's Cosy Residence KS 73275,266,31,24,12,4,5,7,28,46,20,27
+2,Mittie Brekke's Cool Crib WY 66691,87,34,9,11,4,5,2,22,47,256,9
+3,Clark Tremblay's Big House PA 95980,454,31,32,8,4,5,3,28,31,231,45
+4,Jade Wintheiser's Awesome Suite NY 45953,58,23,6,10,4,5,7,30,48,247,6
+5,Leonora Stroman's City Crib NE 85651,176,29,14,3,4,5,5,25,31,125,18
+6,Sarina Green's Cute House IN 38281,699,38,35,5,2,5,6,22,37,177,70
+7,Luz Luettgen's Stylish Villa MT 38174,518,25,26,10,2,5,7,20,35,270,52
+8,Dewayne Beatty's Country Condo NV 93173,551,26,39,3,3,5,4,28,22,264,55
+9,Uriah Ankunding's Cute Penthouse HI 71603,278,29,28,5,4,5,4,20,28,188,28
+10,Miss Kendra Donnelly's Lovely Lodge AK 62589,772,23,77,3,4,5,3,20,39,69,77
+11,Buck Luettgen Jr.'s Cosy Cottage GA 83549,227,28,11,10,3,5,5,24,27,115,23
+12,Calista Wintheiser's Pretty Penthouse NE 60584,183,23,16,9,2,5,5,22,45,291,18
+13,Amely Kulas's Awesome Condo IL 24558,686,20,48,12,4,5,4,23,37,207,69
+14,Eden Legros's Beautiful Suite FL 51385,636,24,57,4,3,5,3,21,23,231,64
+15,Adrien Barton's City Villa AZ 91416,63,33,5,3,2,5,3,27,34,30,6
+16,Joanny Botsford's Lovely Penthouse OH 44435,177,35,11,10,2,5,2,25,23,206,18
+17,Trent Ernser IV's City Place SD 49615,368,40,22,5,3,5,7,26,39,299,37
+18,Skyla Doyle's Beautiful Residence MI 94008,86,35,8,7,3,5,6,21,39,293,9
+19,Henriette Gislason's Town Terrace NC 34391,484,25,34,2,3,5,4,20,29,111,48
+20,Jarrett Dibbert's Lovely Loft LA 14026,329,36,16,5,2,5,5,20,46,0,33
+21,Willa Gleason's Lovely Flat AR 20391,745,22,75,9,2,5,5,22,35,70,75
+22,Miss Stone Corwin's Awesome House AK 00751,291,38,26,5,3,5,5,21,31,22,29
+23,Addison Kiehn's Lovely Terrace KS 51048,457,32,32,6,3,5,2,29,50,283,46
+24,Corrine Wehner's City Lodge MD 02437,503,28,30,9,4,5,5,27,43,240,50
+25,Ms. Golda Ferry's Luxury Lodge IA 77111,524,24,47,11,3,5,5,24,20,28,52
+26,Tremaine Nikolaus's Gorgeous Home OK 55702,76,34,8,8,4,5,5,30,26,188,8
+27,Dayton Collins's Big Crib AZ 10897,768,22,61,6,4,5,7,24,38,225,77
+28,Angeline Klein's Pretty Villa GA 87870,798,34,40,3,2,5,5,22,35,182,80
+29,Marion Hettinger's Awesome House WV 87758,696,26,70,12,3,5,6,21,45,296,70
+30,Roscoe Kuvalis's Dreamy Terrace KS 58469,275,33,14,8,2,5,3,21,35,116,28
+31,Christine Smith's Cute Studio MN 70730,468,39,37,7,4,5,2,21,34,168,47
+32,Josefina Parisian's Town Studio NM 95649,686,27,34,12,4,5,5,30,40,193,69
+33,Meghan Wunsch's City Suite NJ 68628,736,24,37,8,4,5,5,29,46,175,74
+34,Lauretta Kris DDS's Country Condo MS 29735,455,35,46,12,3,5,5,27,41,18,46
+35,Isabella Dach's Beautiful Flat TN 98255,189,20,13,10,2,5,5,20,28,24,19
+36,Nathanael Gleichner's Stylish Loft CO 12078,206,37,19,11,4,5,5,22,26,284,21
+37,Cristopher Boehm's Cool Quarter WI 61541,789,25,55,2,3,5,2,20,28,193,79
+38,Dino Kuvalis's Lovely Villa SC 03116,692,34,48,9,3,5,6,25,46,176,69
+39,Gaetano Keebler's Luxury Apartment TX 69926,674,39,47,5,3,5,7,30,23,213,67
+40,Laney McGlynn's Lovely Lodge PA 78558,776,36,39,12,3,5,2,22,45,116,78
+41,Hillard Abbott's Cosy Home VA 99913,511,25,36,2,2,5,4,20,38,231,51
+42,Cordell Hilpert's Lovely Loft OK 13735,85,27,9,11,4,5,6,24,20,213,9
+43,Tom Hartmann's Unique Crib NM 61268,629,33,38,9,2,5,7,25,50,209,63
+44,Carli Hilpert's Stylish Suite OH 38182,404,38,20,6,4,5,5,30,35,246,40
+45,Hans Kuphal's Lovely Crib RI 09102,526,26,53,5,4,5,7,22,26,104,53
+46,Rhianna Price's Big House IN 33441,658,36,53,8,4,5,6,30,40,83,66
+47,Delia Kohler's Lovely Studio TX 84680,115,33,12,6,2,5,3,26,38,275,12
+48,Christopher Nikolaus's Cute Terrace CA 03022,167,20,13,3,3,5,6,29,24,108,17
+49,Miss Marquise Greenholt's Country Place MS 67353,420,30,21,9,3,5,2,30,36,50,42
+50,Ms. Maude Satterfield's Gorgeous Home GA 53222,455,29,36,9,4,5,2,22,35,111,46
