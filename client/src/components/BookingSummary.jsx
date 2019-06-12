@@ -158,7 +158,7 @@ export default class BookingSummary extends React.Component {
             </table>
             <div className={css.dividingSection} />
           </div>
-          <button className={css.book} type="submit" onClick={this.handleClick}>Sign Up</button>
+          <button className={css.book} type="submit" onClick={this.handleClick}>Book</button>
         </div>
       </div>
     );

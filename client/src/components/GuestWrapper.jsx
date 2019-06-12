@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export default class ClickOutsideOfGuestPicker extends Component {
+export default class GuestWrapper extends Component {
   constructor(props) {
     super(props);
-
     this.setWrapperRef = this.setWrapperRef.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
   }
@@ -22,10 +21,10 @@ export default class ClickOutsideOfGuestPicker extends Component {
   }
 
   handleClickOutside(event) {
-    const { clickOutsideOfGuestPicker } = this.props;
+    const { clickOutsideGuest } = this.props;
 
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-      clickOutsideOfGuestPicker();
+      clickOutsideGuest();
     }
   }
 
@@ -35,7 +34,7 @@ export default class ClickOutsideOfGuestPicker extends Component {
   }
 }
 
-ClickOutsideOfGuestPicker.propTypes = {
+GuestWrapper.propTypes = {
   children: PropTypes.element.isRequired,
-  clickOutsideOfGuestPicker: PropTypes.func.isRequired,
+  clickOutsideGuest: PropTypes.func.isRequired,
 };

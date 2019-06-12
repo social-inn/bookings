@@ -1,7 +1,6 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 import PropTypes from 'prop-types';
-import ClickOutsideOfGuestPicker from './ClickOutsideOfGuestPicker.jsx';
 import css from '../../../public/dist/App.css';
 
 const GuestPicker = (props) => {
@@ -12,14 +11,12 @@ const GuestPicker = (props) => {
     adults,
     numChildren,
     infants,
-    clickOutsideOfGuestPicker,
     increaseGuest,
     decreaseGuest,
     guestExpandToggle,
   } = props;
 
   return (
-    <ClickOutsideOfGuestPicker clickOutsideOfGuestPicker={clickOutsideOfGuestPicker}>
       <div className={css.picker}>
         <div>
           <div className={css.guestType}>
@@ -60,7 +57,6 @@ const GuestPicker = (props) => {
         </div>
         <button type="submit" className={css.close} onClick={guestExpandToggle}>Close</button>
       </div>
-    </ClickOutsideOfGuestPicker>
   );
 };
 
@@ -71,7 +67,6 @@ GuestPicker.propTypes = {
   adults: PropTypes.number,
   numChildren: PropTypes.number,
   infants: PropTypes.number,
-  clickOutsideOfGuestPicker: PropTypes.func,
   increaseGuest: PropTypes.func,
   decreaseGuest: PropTypes.func,
   guestExpandToggle: PropTypes.func,
@@ -84,7 +79,6 @@ GuestPicker.defaultProps = {
   adults: 0,
   numChildren: 0,
   infants: 0,
-  clickOutsideOfGuestPicker: () => { },
   increaseGuest: () => { },
   decreaseGuest: () => { },
   guestExpandToggle: () => { },

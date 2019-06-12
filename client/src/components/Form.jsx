@@ -4,7 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import $ from 'jquery';
+import axios from 'axios';
 import Date from './Date.jsx';
 import Cost from './Cost.jsx';
 import Guest from './Guest.jsx';
@@ -46,7 +46,7 @@ export default class Form extends React.Component {
     this.handleCheckoutClicked = this.handleCheckoutClicked.bind(this);
     this.calendarInitialize = this.calendarInitialize.bind(this);
     this.updateTotalNights = this.updateTotalNights.bind(this);
-    this.clickOutsideOfGuestPicker = this.clickOutsideOfGuestPicker.bind(this);
+    this.clickOutsideGuest = this.clickOutsideGuest.bind(this);
     this.handleBothUnclicked = this.handleBothUnclicked.bind(this);
     this.makeBooking = this.makeBooking.bind(this);
     this.bookButtonClick = this.bookButtonClick.bind(this);
@@ -90,35 +90,15 @@ export default class Form extends React.Component {
 
   guestButtonMessage() {
     const { adults, children, infants } = this.state;
-    if (adults === 1) {
-      this.setState({
-        adultMessage: '1 guest',
-      });
-    } else {
-      this.setState({
-        adultMessage: `${adults} guests`,
-      });
-    }
-
-    if (children === 1) {
-      this.setState({
-        childrenMessage: ', 1 child',
-      });
-    } else {
-      this.setState({
-        childrenMessage: `, ${children} children`,
-      });
-    }
-
-    if (infants === 1) {
-      this.setState({
-        infantMessage: ', 1 infant',
-      });
-    } else {
-      this.setState({
-        infantMessage: `, ${infants} infants`,
-      });
-    }
+    let { adultMessage, childrenMessage, infantMessage } = this.state;
+    adultMessage = adults === 1 ? '1 guest' : `${adults} guests`;
+    childrenMessage = children === 1 ? '1 child' : `${children} children`;
+    infantMessage = infants === 1 ? '1 infant' : `${infants} infants`;
+    this.setState({
+      adultMessage,
+      childrenMessage,
+      infantMessage
+    });
   }
 
   guestSelectToggle(e) {
@@ -137,7 +117,7 @@ export default class Form extends React.Component {
     e.preventDefault();
   }
 
-  clickOutsideOfGuestPicker() {
+  clickOutsideGuest() {
     this.setState({
       guestExpand: false,
     });
@@ -217,27 +197,31 @@ export default class Form extends React.Component {
     const {
       checkIn, checkOut, adults, children, infants,
     } = this.state;
-    const checkInDate = moment(checkIn, 'MM/DD/YYYY').format();
-    const checkOutDate = moment(checkOut, 'MM/DD/YYYY').format();
-    const data = {
-      checkin: checkInDate,
-      checkout: checkOutDate,
+    const { getBookingData } = this.props;
+    const checkInDate = moment(checkIn, 'MM/DD/YYYY').format('YYYY-MM-DD');
+    const checkOutDate = moment(checkOut, 'MM/DD/YYYY').format('YYYY-MM-DD');
+    const data = JSON.stringify({
+      roomId,
+      email,
       adults,
       children,
       infants,
-      email,
-      roomId,
-    };
-    $.ajax({
-      url: `/rooms/${roomId}/bookings`,
-      type: 'POST',
-      contentType: 'application/json',
-      data: JSON.stringify(data),
-      success: (err, result) => {
-        if (result === 'success') {
-          this.formInitialize();
-        }
-      },
+      checkin: checkInDate,
+      checkout: checkOutDate,
+    });
+    axios.post('/bookings', data, { headers: { 'Content-Type': 'application/json' }})
+    .then((result) => {
+      alert(`Your booking has been made successfully. 
+      Your booking id is: ${result.data[0].id}.`);
+      getBookingData();
+      this.formInitialize();
+    })
+    .catch((err) => {
+      if(err.response.status === 409) {
+        alert('Sorry, it seems like your dates have been booked.\nPlease try again with a different date.');
+      }
+      getBookingData();
+      this.formInitialize();
     });
   }
 
@@ -362,7 +346,7 @@ export default class Form extends React.Component {
               guestExpandToggle={this.guestExpandToggle}
               guestExpand={guestExpand}
               updateTotalNights={this.updateTotalNights}
-              clickOutsideOfGuestPicker={this.clickOutsideOfGuestPicker}
+              clickOutsideGuest={this.clickOutsideGuest}
             />
             {selectedNights !== 'Invalid date' && guestSelected && !guestExpand
               ? (

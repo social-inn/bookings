@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import GuestPicker from './GuestPicker.jsx';
+import GuestWrapper from './GuestWrapper.jsx';
 import css from '../../../public/dist/App.css';
 
 const Guest = (props) => {
@@ -17,14 +18,15 @@ const Guest = (props) => {
     adults,
     numChildren,
     infants,
-    clickOutsideOfGuestPicker,
+    clickOutsideGuest,
     increaseGuest,
     decreaseGuest,
     updateTotalNights,
     guestButtonMessage,
   } = props;
   return (
-    <div className={css.guest}>
+    <GuestWrapper clickOutsideGuest={clickOutsideGuest}>
+      <div className={css.guest}>
       <div className={css.guestSection}>Guests</div>
       <div className={css.guestSection1}>
         <button
@@ -93,11 +95,11 @@ const Guest = (props) => {
               guestButtonMessage={guestButtonMessage}
               guestExpandToggle={guestExpandToggle}
               updateTotalNights={updateTotalNights}
-              clickOutsideOfGuestPicker={clickOutsideOfGuestPicker}
             />
           ) : null}
       </div>
-    </div>
+      </div>
+    </GuestWrapper>
   );
 };
 

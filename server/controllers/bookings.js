@@ -20,14 +20,15 @@ const addBooking = (req, res) => {
                    SELECT * FROM bookings WHERE roomid = $1
                    AND checkout::date > $6
                    AND checkin::date < $7
-                 )`;
+                 )
+                 RETURNING id`;
   db.pool.query(query, values, (err, result) => {
     if (err) {
       res.sendStatus(500);
     } else if (result.rowCount !== 1) {
       res.sendStatus(409);
     } else {
-      res.sendStatus(201);
+      res.status(201).send(result.rows);
     }
   });
 };

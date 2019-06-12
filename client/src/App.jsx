@@ -125,6 +125,7 @@ export default class App extends React.Component {
             roomname={roomInfo.roomname}
             reviews={roomInfo.numreviews}
             ratings={roomInfo.ratings}
+            getBookingData={this.getBookingData}
           />
         </div>
 
