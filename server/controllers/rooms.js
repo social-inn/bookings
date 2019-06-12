@@ -3,7 +3,7 @@ const db = require('../../db/index');
 const getRooms = (req, res) => {
   const query = `SELECT * FROM rooms WHERE id = ${req.params.id}`;
   db.pool.query(query, (err, result) => {
-    if (err) {
+    if (err || result.rowCount === 0) {
       res.sendStatus(404);
     } else {
       res.status(200).send(result.rows[0]);
@@ -42,10 +42,19 @@ const updateRoom = (req, res) => {
   const query = `UPDATE rooms
                  SET ${updates.join(', ')}
                  WHERE id = ${req.body.id}`;
-  console.log('query is', query);
-  console.log('values is', values);
   db.pool.query(query, values, (err) => {
     if (err) {
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(200);
+    }
+  });
+};
+
+const deleteRoom = (req, res) => {
+  const query = `DELETE FROM rooms WHERE id = ${req.params.id}`;
+  db.pool.query(query, (err, result) => {
+    if(err) {
       res.sendStatus(500);
     } else {
       res.sendStatus(200);
@@ -57,4 +66,5 @@ module.exports = {
   getRooms,
   addRoom,
   updateRoom,
+  deleteRoom,
 };

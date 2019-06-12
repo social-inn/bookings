@@ -60,7 +60,18 @@ const updateBooking = (req, res) => {
     } else if (result.rowCount !== 1) {
       res.sendStatus(409);
     } else {
-      res.sendStatus(201);
+      res.sendStatus(200);
+    }
+  });
+};
+
+const deleteBooking = (req, res) => {
+  const query = `DELETE FROM bookings WHERE id = ${req.params.id}`;
+  db.pool.query(query, (err, result) => {
+    if(err) {
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(200);
     }
   });
 };
@@ -69,4 +80,5 @@ module.exports = {
   getAllBookings,
   addBooking,
   updateBooking,
+  deleteBooking,
 };

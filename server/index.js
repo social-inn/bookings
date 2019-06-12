@@ -18,6 +18,8 @@ app.post('/rooms', rooms.addRoom);
 app.post('/bookings', bookings.addBooking);
 app.put('/rooms', rooms.updateRoom);
 app.put('/bookings', bookings.updateBooking);
+app.delete('/rooms/:id', rooms.deleteRoom);
+app.delete('/bookings/:id', bookings.deleteBooking);
 
 app.listen(port, () => {
   console.log(`Listening port: ${port}`);
