@@ -33,10 +33,40 @@ const addBooking = (req, res) => {
 };
 
 const updateBooking = (req, res) => {
-
+  const cols = Object.keys(req.body);
+  const updates = [];
+  const values = [];
+  let count = 1;
+  for (var header of cols) {
+    if (header !== 'id' && header !== 'roomid') {
+      updates.push(`${header.toLowerCase()} = $${count}`);
+      values.push(req.body[header]);
+      count += 1;
+    }
+  }
+  values.push(req.body.roomid, req.body.checkin, req.body.checkout);
+  const query = `UPDATE bookings
+                 SET ${updates.join(', ')}
+                 WHERE NOT EXISTS (
+                   SELECT * from bookings where roomid = $${count++}
+                   AND checkout::date > $${count++}
+                   AND checkin::date < $${count++}
+                   AND id != ${req.body.id}
+                 )
+                 AND id = ${req.body.id}`;
+  db.pool.query(query, values, (err, result) => {
+    if (err) {
+      res.sendStatus(500);
+    } else if (result.rowCount !== 1) {
+      res.sendStatus(409);
+    } else {
+      res.sendStatus(201);
+    }
+  });
 };
 
 module.exports = {
   getAllBookings,
   addBooking,
+  updateBooking,
 };

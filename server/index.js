@@ -17,7 +17,7 @@ app.get('/rooms/:id/bookings', bookings.getAllBookings);
 app.post('/rooms', rooms.addRoom);
 app.post('/bookings', bookings.addBooking);
 app.put('/rooms', rooms.updateRoom);
-// app.put('/bookings', bookings.updateBooking);
+app.put('/bookings', bookings.updateBooking);
 
 app.listen(port, () => {
   console.log(`Listening port: ${port}`);

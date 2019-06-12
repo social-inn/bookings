@@ -30,15 +30,21 @@ const addRoom = (req, res) => {
 const updateRoom = (req, res) => {
   const cols = Object.keys(req.body);
   const updates = [];
-  for (let i = 0; i < cols.length; i += 1) {
-    if (cols[i] !== 'id') {
-      updates.push(`${cols[i]} = ${i + 1}`);
+  const values = [];
+  let count = 1;
+  for (var header of cols) {
+    if (header !== 'id') {
+      updates.push(`${header.toLowerCase()} = $${count}`);
+      values.push(req.body[header]);
+      count += 1;
     }
   }
   const query = `UPDATE rooms
-                 SET ${updates.join(',')}
+                 SET ${updates.join(', ')}
                  WHERE id = ${req.body.id}`;
-  db.pool.query(query, (err) => {
+  console.log('query is', query);
+  console.log('values is', values);
+  db.pool.query(query, values, (err) => {
     if (err) {
       res.sendStatus(500);
     } else {
