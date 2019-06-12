@@ -103,22 +103,22 @@ Endpoint: ```/rooms```
 Expected Data Input: Object in application/json format
 
 Example: 
-  ```sh
+```sh
 { 
-  "roomname": 'My Nice Home',
-  "price": 30,
-  "cleaningFee": 30,
-  "serviceFee": 20,
-  "maxAdults": 4,
-  "maxChildren": 2,
-  "maxInfants": 5,
-  "minNights": 4,
-  "maxNights": 20,
-  "ratings": 45,
-  "numReviews": 40,
-  "tax": 10,
+    "roomname": 'My Nice Home',
+    "price": 30,
+    "cleaningFee": 30,
+    "serviceFee": 20,
+    "maxAdults": 4,
+    "maxChildren": 2,
+    "maxInfants": 5,
+    "minNights": 4,
+    "maxNights": 20,
+    "ratings": 45,
+    "numReviews": 40,
+    "tax": 10,
 }
-  ```
+```
 
 **Success Response:**
   * Code: 201
@@ -134,17 +134,17 @@ Endpoint: ```/bookings```
 Expected Data Input: Object in application/json format
 
 Example: 
-  ```sh
+```sh
 {
-  "email": "Marquis_McClure@gmail.com",
-  "adults": 2,
-  "children": 0,
-  "infants": 2,
-  "checkin": "2019-08-03",
-  "checkout": "2019-08-05",
-  "roomId": 1
+    "email": "Marquis_McClure@gmail.com",
+    "adults": 2,
+    "children": 0,
+    "infants": 2,
+    "checkin": "2019-08-03",
+    "checkout": "2019-08-05",
+    "roomId": 1
 }
-  ```
+```
 
 **Success Response:**
   * Code: 201
@@ -162,23 +162,23 @@ Endpoint: ```/rooms```
 Expected Data Input: Object with updated information in application/json format 
 
 Example: 
-  ```sh
+```sh
 { 
-  "id": 1,
-  "roomname": 'My Nice Home',
-  "price": 100,
-  "cleaningFee": 10,
-  "serviceFee": 30,
-  "maxAdults": 8,
-  "maxChildren": 2,
-  "maxInfants": 2,
-  "minNights": 4,
-  "maxNights": 10,
-  "ratings": 10,
-  "numReviews": 200,
-  "tax": 20,
+    "id": 1,
+    "roomname": 'My Nice Home',
+    "price": 100,
+    "cleaningFee": 10,
+    "serviceFee": 30,
+    "maxAdults": 8,
+    "maxChildren": 2,
+    "maxInfants": 2,
+    "minNights": 4,
+    "maxNights": 10,
+    "ratings": 10,
+    "numReviews": 200,
+    "tax": 20,
 }
-  ```
+```
 
 **Success Response:**
   * Code: 200
@@ -194,18 +194,18 @@ Endpoint: ```/bookings```
 Expected Data Input: Object with updated information in application/json format
 
 Example: 
-  ```sh
+```sh
 {
-  "id": 20,
-  "email": "Marquis_McClure@gmail.com",
-  "adults": 4,
-  "children": 0,
-  "infants": 2,
-  "checkin": "2019-08-03",
-  "checkout": "2019-08-05",
-  "roomId": 1
+    "id": 20,
+    "email": "Marquis_McClure@gmail.com",
+    "adults": 4,
+    "children": 0,
+    "infants": 2,
+    "checkin": "2019-08-03",
+    "checkout": "2019-08-05",
+    "roomId": 1
 }
-  ```
+```
 
 **Success Response:**
   * Code: 200
