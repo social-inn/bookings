@@ -5,6 +5,7 @@ import moment from 'moment';
 import Info from './components/Info.jsx';
 import Form from './components/Form.jsx';
 import css from '../../public/dist/App.css';
+import axios from 'axios';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -42,57 +43,17 @@ export default class App extends React.Component {
   }
 
   getRoomData() {
-    const link = window.location.href.match(/id\s*=\s*(.*)/);
-    if (link) {
-      $.ajax({
-        url: `/room?id=${link[1]}`,
-        type: 'GET',
-        error: (err) => {
-          console.log(err);
-        },
-        success: (result) => {
-          this.updateRoomState(result);
-        },
-      });
-    } else {
-      $.ajax({
-        url: '/room?id=1',
-        type: 'GET',
-        error: (err) => {
-          console.log(err);
-        },
-        success: (result) => {
-          this.updateRoomState(result);
-        },
-      });
-    }
+    const id = window.location.pathname.split('/')[2] || 1;
+    axios.get(`/rooms/${id}/basicinfo`)
+    .then(result => this.updateRoomState(result.data))
+    .catch(err => console.log(err));
   }
 
   getBookingData() {
-    const link = window.location.href.match(/id\s*=\s*(.*)/);
-    if (link) {
-      $.ajax({
-        url: `/booking?id=${link[1]}`,
-        type: 'GET',
-        error: (err) => {
-          console.log(err);
-        },
-        success: (result) => {
-          this.updateBookedDates(result);
-        },
-      });
-    } else {
-      $.ajax({
-        url: '/booking?id=1',
-        type: 'GET',
-        error: (err) => {
-          console.log(err);
-        },
-        success: (result) => {
-          this.updateBookedDates(result);
-        },
-      });
-    }
+    const id = window.location.pathname.split('/')[2] || 1;
+    axios.get(`/rooms/${id}/bookings`)
+    .then(result => this.updateBookedDates(result.data))
+    .catch(err => console.log(err));
   }
 
   initialize() {
@@ -107,15 +68,15 @@ export default class App extends React.Component {
   }
 
   updateBookedDates(results) {
-    const bookedDate = [];
+    const bookedDates = [];
     results.forEach((data) => {
-      const nights = moment(data.check_out).diff(data.check_in, 'd');
+      const nights = moment(data.checkout).diff(data.checkin, 'd');
       for (let i = 0; i < nights; i += 1) {
-        bookedDate.push(moment(data.check_in, 'YYYY-MM-DD').add(i, 'd'));
+        bookedDates.push(moment(data.checkin, 'YYYY-MM-DD').add(i, 'd'));
       }
     });
     this.setState({
-      bookedDates: bookedDate,
+      bookedDates,
     });
   }
 
@@ -143,26 +104,26 @@ export default class App extends React.Component {
         <div>
           <Info
             price={roomInfo.price}
-            reviews={roomInfo.numReviews}
+            reviews={roomInfo.numreviews}
             ratings={roomInfo.ratings}
           />
         </div>
         <div className={css.dividingSection} />
         <div>
           <Form
-            maxAdults={roomInfo.maxAdults}
-            maxChildren={roomInfo.maxChildren}
-            maxInfants={roomInfo.maxInfants}
+            maxAdults={roomInfo.maxadults}
+            maxChildren={roomInfo.maxchildren}
+            maxInfants={roomInfo.maxinfants}
             price={roomInfo.price}
-            cleaningFee={roomInfo.cleaningFee}
-            serviceFee={roomInfo.serviceFee}
+            cleaningFee={roomInfo.cleaningfee}
+            serviceFee={roomInfo.servicefee}
             tax={roomInfo.tax}
-            minNights={roomInfo.minNights}
-            maxNights={roomInfo.maxNights}
+            minNights={roomInfo.minnights}
+            maxNights={roomInfo.maxnights}
             bookedDates={bookedDates}
             roomId={roomId}
             roomname={roomInfo.roomname}
-            reviews={roomInfo.numReviews}
+            reviews={roomInfo.numreviews}
             ratings={roomInfo.ratings}
           />
         </div>

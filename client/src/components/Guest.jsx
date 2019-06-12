@@ -11,7 +11,9 @@ const Guest = (props) => {
     guestExpand,
     guestSelected,
     guestExpandToggle,
-    guest,
+    maxAdults,
+    maxChildren,
+    maxInfants,
     adults,
     numChildren,
     infants,
@@ -83,7 +85,9 @@ const Guest = (props) => {
               adults={adults}
               numChildren={numChildren}
               infants={infants}
-              guest={guest}
+              maxAdults={maxAdults}
+              maxChildren={maxChildren}
+              maxInfants={maxInfants}
               increaseGuest={increaseGuest}
               decreaseGuest={decreaseGuest}
               guestButtonMessage={guestButtonMessage}

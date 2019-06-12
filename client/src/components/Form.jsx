@@ -129,18 +129,10 @@ export default class Form extends React.Component {
   }
 
   guestExpandToggle(e) {
-    const { guestExpand } = this.state;
-    if (!guestExpand) {
-      this.setState({
-        guestExpand: true,
-        guestSelected: true,
-      }, this.calculateCostPerNight);
-    } else {
-      this.setState({
-        guestExpand: false,
-        guestSelected: true,
-      }, this.calculateCostPerNight);
-    }
+    this.setState({
+      guestExpand: !this.state.guestExpand,
+      guestSelected: true,
+    }, this.calculateCostPerNight);
     this.updateTotalNights();
     e.preventDefault();
   }
@@ -319,8 +311,8 @@ export default class Form extends React.Component {
       price,
       cleaningFee,
       serviceFee,
-      minNight,
-      maxNight,
+      minNights,
+      maxNights,
       roomId,
       roomname,
       reviews,
@@ -350,8 +342,8 @@ export default class Form extends React.Component {
               checkInClicked={checkInClicked}
               checkOutClicked={checkOutClicked}
               calendarInitialize={this.calendarInitialize}
-              minNight={minNight}
-              maxNight={maxNight}
+              minNight={minNights}
+              maxNight={maxNights}
               handleBothUnclicked={this.handleBothUnclicked}
             />
             <Guest

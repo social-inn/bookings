@@ -12,6 +12,10 @@ app.use(express.static(path.join(__dirname, '../public/dist')));
 app.use(bodyParser.json());
 app.use(cors());
 
+app.get('/rooms/:id', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/dist/index.html'));
+})
+
 app.get('/rooms/:id/basicinfo', rooms.getRooms);
 app.get('/rooms/:id/bookings', bookings.getAllBookings);
 app.post('/rooms', rooms.addRoom);
