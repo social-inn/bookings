@@ -41,7 +41,7 @@ Endpoint: ```/rooms/:id/basicinfo```
     "roomname": "Alphonso Fahey's House",
     "price": 1167,
     "cleaningFee": 39,
-    "serviceFee": 1272,
+    "serviceFee": 127,
     "maxAdults": 10,
     "maxChildren": 4,
     "maxInfants": 5,
@@ -49,8 +49,7 @@ Endpoint: ```/rooms/:id/basicinfo```
     "maxNights": 49,
     "ratings": 32,
     "numReviews": 65,
-    "createdAt": "2019-06-05T00:04:55.000Z",
-    "updatedAt": "2019-06-05T00:04:55.000Z"
+    "tax": 10,
 }
 
 ```
@@ -76,10 +75,8 @@ Endpoint: ```/rooms/:id/bookings```
         "adults": 3,
         "children": 1,
         "infants": 0,
-        "checkIn": "2019-09-08T05:11:19.000Z",
-        "checkOut": "2019-09-11T05:11:19.000Z",
-        "createdAt": "2019-06-05T00:04:55.000Z",
-        "updatedAt": "2019-06-05T00:04:55.000Z",
+        "checkIn": "2019-09-08",
+        "checkOut": "2019-09-11",
         "roomId": 1
     },
     {
@@ -88,10 +85,8 @@ Endpoint: ```/rooms/:id/bookings```
         "adults": 3,
         "children": 0,
         "infants": 2,
-        "checkIn": "2019-09-13T18:26:40.000Z",
-        "checkOut": "2019-09-19T18:26:40.000Z",
-        "createdAt": "2019-06-05T00:04:55.000Z",
-        "updatedAt": "2019-06-05T00:04:55.000Z",
+        "checkIn": "2019-09-13",
+        "checkOut": "2019-09-19",
         "roomId": 1
     },
 
@@ -109,17 +104,19 @@ Expected Data Input: Object in application/json format
 
 Example: 
   ```sh
-{ roomname: 'My Nice Home',
-  price: 30,
-  cleaningFee: 30,
-  serviceFee: 20,
-  maxAdults: 4,
-  maxChildren: 2,
-  maxInfants: 5,
-  minNights: 4,
-  maxNights: 20,
-  ratings: 45,
-  numReviews: 40
+{ 
+  "roomname": 'My Nice Home',
+  "price": 30,
+  "cleaningFee": 30,
+  "serviceFee": 20,
+  "maxAdults": 4,
+  "maxChildren": 2,
+  "maxInfants": 5,
+  "minNights": 4,
+  "maxNights": 20,
+  "ratings": 45,
+  "numReviews": 40,
+  "tax": 10,
 }
   ```
 
@@ -143,8 +140,8 @@ Example:
   "adults": 2,
   "children": 0,
   "infants": 2,
-  "checkIn": "2019-08-03T07:00:00.000Z",
-  "checkOut": "2019-08-05T07:00:00.000Z",
+  "checkin": "2019-08-03",
+  "checkout": "2019-08-05",
   "roomId": 1
 }
   ```
@@ -167,23 +164,24 @@ Expected Data Input: Object with updated information in application/json format
 Example: 
   ```sh
 { 
-  id: 1,
-  roomname: 'My Nice Home',
-  price: 10,
-  cleaningFee: 10,
-  serviceFee: 30,
-  maxAdults: 8,
-  maxChildren: 2,
-  maxInfants: 2,
-  minNights: 4,
-  maxNights: 10,
-  ratings: 10,
-  numReviews: 200
+  "id": 1,
+  "roomname": 'My Nice Home',
+  "price": 100,
+  "cleaningFee": 10,
+  "serviceFee": 30,
+  "maxAdults": 8,
+  "maxChildren": 2,
+  "maxInfants": 2,
+  "minNights": 4,
+  "maxNights": 10,
+  "ratings": 10,
+  "numReviews": 200,
+  "tax": 20,
 }
   ```
 
 **Success Response:**
-  * Code: 201
+  * Code: 200
 
 **Error Response:**
   * Code: 500
@@ -203,17 +201,17 @@ Example:
   "adults": 4,
   "children": 0,
   "infants": 2,
-  "checkIn": "2019-08-03T07:00:00.000Z",
-  "checkOut": "2019-08-05T07:00:00.000Z",
+  "checkin": "2019-08-03",
+  "checkout": "2019-08-05",
   "roomId": 1
 }
   ```
 
 **Success Response:**
-  * Code: 201
+  * Code: 200
 
 **Error Response:**
-  * Code: 403 (Booking Conflict, Cannot be amended)
+  * Code: 409 (Booking Conflict, Cannot be amended)
   * Code: 500 (Server Error)
 
 ## DELETE
@@ -223,7 +221,7 @@ Example:
 Endpoint: ```rooms/:id```
 
 **Success Response:**
-  * Code: 201
+  * Code: 200
 
 **Error Response:**
   * Code: 500
@@ -233,7 +231,7 @@ Endpoint: ```rooms/:id```
 Endpoint: ```bookings/:id```
 
 **Success Response:**
-  * Code: 201
+  * Code: 200
 
 **Error Response:**
   * Code: 500
