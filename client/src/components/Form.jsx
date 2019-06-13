@@ -211,15 +211,17 @@ export default class Form extends React.Component {
     });
     axios.post('/bookings', data, { headers: { 'Content-Type': 'application/json' }})
     .then((result) => {
-      if (result.status === 200) {
+      if (result.status === 201) {
         alert(`Your booking has been made successfully. 
         Your booking id is: ${result.data[0].id}.`);
       } else if (result.status === 202) {
         alert('Sorry, it seems like your dates have been booked.\nPlease try again with a different date.');
       }
     })
-    getBookingData();
-    this.formInitialize();
+    .then(() => {
+      getBookingData();
+      this.formInitialize();
+    });
   }
 
   bookButtonClick() {
@@ -414,7 +416,7 @@ Form.defaultProps = {
   bookedDates: [{}],
   minNight: 0,
   maxNight: 0,
-  roomId: 1,
+  roomId: '1',
   roomname: '',
   reviews: 0,
   ratings: 0,

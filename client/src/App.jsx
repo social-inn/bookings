@@ -39,19 +39,22 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    this.initialize();
+    const roomId = Number(window.location.pathname.split('/')[2]) || 1;
+    this.setState({
+      roomId,
+    }, this.initialize);
   }
 
   getRoomData() {
-    const id = window.location.pathname.split('/')[2] || 1;
-    axios.get(`/rooms/${id}/basicinfo`)
+    const { roomId } = this.state;
+    axios.get(`/rooms/${roomId}/basicinfo`)
     .then(result => this.updateRoomState(result.data))
     .catch(err => console.log(err));
   }
 
   getBookingData() {
-    const id = window.location.pathname.split('/')[2] || 1;
-    axios.get(`/rooms/${id}/bookings`)
+    const { roomId } = this.state;
+    axios.get(`/rooms/${roomId}/bookings`)
     .then(result => this.updateBookedDates(result.data))
     .catch(err => console.log(err));
   }
