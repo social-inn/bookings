@@ -211,18 +211,15 @@ export default class Form extends React.Component {
     });
     axios.post('/bookings', data, { headers: { 'Content-Type': 'application/json' }})
     .then((result) => {
-      alert(`Your booking has been made successfully. 
-      Your booking id is: ${result.data[0].id}.`);
-      getBookingData();
-      this.formInitialize();
-    })
-    .catch((err) => {
-      if(err.response.status === 409) {
+      if (result.status === 200) {
+        alert(`Your booking has been made successfully. 
+        Your booking id is: ${result.data[0].id}.`);
+      } else if (result.status === 202) {
         alert('Sorry, it seems like your dates have been booked.\nPlease try again with a different date.');
       }
-      getBookingData();
-      this.formInitialize();
-    });
+    })
+    getBookingData();
+    this.formInitialize();
   }
 
   bookButtonClick() {

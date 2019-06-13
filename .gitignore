@@ -8,3 +8,5 @@ db/psql/psql_bookings.csv
 db/psql/psql_rooms.csv
 db/cass/cass_bookings.csv
 db/cass/cass_rooms.csv
+
+newrelic.js

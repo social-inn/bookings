@@ -26,7 +26,7 @@ const addBooking = (req, res) => {
     if (err) {
       res.sendStatus(500);
     } else if (result.rowCount !== 1) {
-      res.sendStatus(409);
+      res.sendStatus(202);
     } else {
       res.status(201).send(result.rows);
     }
@@ -59,7 +59,7 @@ const updateBooking = (req, res) => {
     if (err) {
       res.sendStatus(500);
     } else if (result.rowCount !== 1) {
-      res.sendStatus(409);
+      res.sendStatus(202);
     } else {
       res.sendStatus(200);
     }
