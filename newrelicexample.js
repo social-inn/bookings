@@ -1,4 +1,4 @@
-;
+
 
 /**
  * New Relic agent configuration.

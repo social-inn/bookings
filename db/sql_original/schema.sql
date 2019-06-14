@@ -1,5 +1,0 @@
-DROP DATABASE IF EXISTS booking;
-
-CREATE DATABASE booking;
-
-USE booking;

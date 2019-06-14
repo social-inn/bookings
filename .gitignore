@@ -9,5 +9,5 @@ db/psql/psql_rooms.csv
 db/cass/cass_bookings.csv
 db/cass/cass_rooms.csv
 
-newrelic_key.js
+newrelic.js
 newrelic_agent.log

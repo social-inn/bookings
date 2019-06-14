@@ -38,13 +38,14 @@ const updateBooking = (req, res) => {
   const updates = [];
   const values = [];
   let count = 1;
-  for (const header of cols) {
+  cols.forEach(header => {
     if (header !== 'id' && header !== 'roomid') {
       updates.push(`${header.toLowerCase()} = $${count}`);
       values.push(req.body[header]);
       count += 1;
     }
-  }
+  });
+
   values.push(req.body.roomid, req.body.checkin, req.body.checkout);
   const query = `UPDATE bookings
                  SET ${updates.join(', ')}

@@ -32,13 +32,13 @@ const updateRoom = (req, res) => {
   const updates = [];
   const values = [];
   let count = 1;
-  for (const header of cols) {
+  cols.forEach((header) => {
     if (header !== 'id') {
       updates.push(`${header.toLowerCase()} = $${count}`);
       values.push(req.body[header]);
       count += 1;
     }
-  }
+  });
   const query = `UPDATE rooms
                  SET ${updates.join(', ')}
                  WHERE id = ${req.body.id}`;
