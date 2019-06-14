@@ -38,7 +38,7 @@ const updateBooking = (req, res) => {
   const updates = [];
   const values = [];
   let count = 1;
-  for (var header of cols) {
+  for (const header of cols) {
     if (header !== 'id' && header !== 'roomid') {
       updates.push(`${header.toLowerCase()} = $${count}`);
       values.push(req.body[header]);
@@ -69,7 +69,7 @@ const updateBooking = (req, res) => {
 const deleteBooking = (req, res) => {
   const query = `DELETE FROM bookings WHERE id = ${req.params.id}`;
   db.pool.query(query, (err, result) => {
-    if(err) {
+    if (err) {
       res.sendStatus(500);
     } else {
       res.sendStatus(200);

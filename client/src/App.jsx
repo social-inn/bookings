@@ -2,10 +2,10 @@
 import React from 'react';
 import $ from 'jquery';
 import moment from 'moment';
+import axios from 'axios';
 import Info from './components/Info.jsx';
 import Form from './components/Form.jsx';
 import css from '../../public/dist/App.css';
-import axios from 'axios';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -47,16 +47,18 @@ export default class App extends React.Component {
 
   getRoomData() {
     const { roomId } = this.state;
-    axios.get(`/rooms/${roomId}/basicinfo`)
-    .then(result => this.updateRoomState(result.data))
-    .catch(err => console.log(err));
+    axios.get(`/api/rooms/${roomId}/basicinfo`)
+      .then(result => this.updateRoomState(result.data))
+      .catch(err => console.log(err));
   }
 
   getBookingData() {
     const { roomId } = this.state;
-    axios.get(`/rooms/${roomId}/bookings`)
-    .then(result => this.updateBookedDates(result.data))
-    .catch(err => console.log(err));
+    axios.get(`/api/rooms/${roomId}/bookings`)
+      .then((result) => {
+        this.updateBookedDates(result.data);
+      })
+      .catch(err => console.log(err));
   }
 
   initialize() {

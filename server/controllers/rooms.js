@@ -32,7 +32,7 @@ const updateRoom = (req, res) => {
   const updates = [];
   const values = [];
   let count = 1;
-  for (var header of cols) {
+  for (const header of cols) {
     if (header !== 'id') {
       updates.push(`${header.toLowerCase()} = $${count}`);
       values.push(req.body[header]);
@@ -54,7 +54,7 @@ const updateRoom = (req, res) => {
 const deleteRoom = (req, res) => {
   const query = `DELETE FROM rooms WHERE id = ${req.params.id}`;
   db.pool.query(query, (err, result) => {
-    if(err) {
+    if (err) {
       res.sendStatus(500);
     } else {
       res.sendStatus(200);

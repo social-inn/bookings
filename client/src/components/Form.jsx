@@ -97,7 +97,7 @@ export default class Form extends React.Component {
     this.setState({
       adultMessage,
       childrenMessage,
-      infantMessage
+      infantMessage,
     });
   }
 
@@ -209,19 +209,19 @@ export default class Form extends React.Component {
       checkin: checkInDate,
       checkout: checkOutDate,
     });
-    axios.post('/bookings', data, { headers: { 'Content-Type': 'application/json' }})
-    .then((result) => {
-      if (result.status === 201) {
-        alert(`Your booking has been made successfully. 
+    axios.post('/api/bookings', data, { headers: { 'Content-Type': 'application/json' } })
+      .then((result) => {
+        if (result.status === 201) {
+          alert(`Your booking has been made successfully. 
         Your booking id is: ${result.data[0].id}.`);
-      } else if (result.status === 202) {
-        alert('Sorry, it seems like your dates have been booked.\nPlease try again with a different date.');
-      }
-    })
-    .then(() => {
-      getBookingData();
-      this.formInitialize();
-    });
+        } else if (result.status === 202) {
+          alert('Sorry, it seems like your dates have been booked.\nPlease try again with a different date.');
+        }
+      })
+      .then(() => {
+        getBookingData();
+        this.formInitialize();
+      });
   }
 
   bookButtonClick() {
@@ -397,12 +397,13 @@ Form.propTypes = {
   serviceFee: PropTypes.number,
   tax: PropTypes.number,
   bookedDates: PropTypes.arrayOf(PropTypes.object),
-  minNight: PropTypes.number,
-  maxNight: PropTypes.number,
+  minNights: PropTypes.number,
+  maxNights: PropTypes.number,
   roomId: PropTypes.number,
   roomname: PropTypes.string,
   reviews: PropTypes.number,
   ratings: PropTypes.number,
+  getBookingData: PropTypes.func,
 };
 
 Form.defaultProps = {
@@ -414,10 +415,11 @@ Form.defaultProps = {
   serviceFee: 0,
   tax: 0,
   bookedDates: [{}],
-  minNight: 0,
-  maxNight: 0,
+  minNights: 0,
+  maxNights: 0,
   roomId: '1',
   roomname: '',
   reviews: 0,
   ratings: 0,
+  getBookingData: () => { },
 };
