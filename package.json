@@ -12,8 +12,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint",
-      "jest --bail --findRelatedTests"
+      "eslint"
     ],
     "*.css": "stylelint"
   },
