@@ -1,8 +1,8 @@
 const db = require('../../db/index');
 
 const getAllBookings = (req, res) => {
-  const query = `SELECT * FROM bookings where roomid = ${req.params.id}`;
-  db.pool.query(query, (err, result) => {
+  const query = 'SELECT * FROM bookings where roomid = $1';
+  db.pool.query(query, [req.params.id], (err, result) => {
     if (err) {
       res.sendStatus(404);
     } else {
@@ -38,7 +38,7 @@ const updateBooking = (req, res) => {
   const updates = [];
   const values = [];
   let count = 1;
-  cols.forEach(header => {
+  cols.forEach((header) => {
     if (header !== 'id' && header !== 'roomid') {
       updates.push(`${header.toLowerCase()} = $${count}`);
       values.push(req.body[header]);
@@ -68,8 +68,8 @@ const updateBooking = (req, res) => {
 };
 
 const deleteBooking = (req, res) => {
-  const query = `DELETE FROM bookings WHERE id = ${req.params.id}`;
-  db.pool.query(query, (err, result) => {
+  const query = 'DELETE FROM bookings WHERE id = $1';
+  db.pool.query(query, [req.params.id], (err, result) => {
     if (err) {
       res.sendStatus(500);
     } else {

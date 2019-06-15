@@ -2,9 +2,9 @@ import http from 'k6/http';
 import { check } from 'k6';
 
 export const options = {
-  vus: 500,
-  duration: '5m',
-  rps: 500,
+  vus: 600,
+  duration: '30s',
+  rps: 600,
 };
 
 const getRooms = id => http.get(`http://localhost:3000/api/rooms/${id}/basicinfo`);
@@ -30,9 +30,9 @@ export default function () {
   let res;
   const num = Math.random();
   const id = Math.ceil(Math.random() * 10000000);
-  if (num < 0.45) {
+  if (num < 0.475) {
     res = getRooms(id);
-  } else if (num < 0.9) {
+  } else if (num < 0.95) {
     res = getBookings(id);
   } else {
     res = postBooking(id);

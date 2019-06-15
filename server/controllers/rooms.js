@@ -1,8 +1,8 @@
 const db = require('../../db/index');
 
 const getRooms = (req, res) => {
-  const query = `SELECT * FROM rooms WHERE id = ${req.params.id}`;
-  db.pool.query(query, (err, result) => {
+  const query = 'SELECT * FROM rooms WHERE id = $1';
+  db.pool.query(query, [req.params.id], (err, result) => {
     if (err || result.rowCount === 0) {
       res.sendStatus(404);
     } else {
@@ -52,8 +52,8 @@ const updateRoom = (req, res) => {
 };
 
 const deleteRoom = (req, res) => {
-  const query = `DELETE FROM rooms WHERE id = ${req.params.id}`;
-  db.pool.query(query, (err, result) => {
+  const query = 'DELETE FROM rooms WHERE id = $1';
+  db.pool.query(query, [req.params.id], (err, result) => {
     if (err) {
       res.sendStatus(500);
     } else {
