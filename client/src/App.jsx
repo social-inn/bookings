@@ -1,6 +1,5 @@
 /* eslint-disable import/extensions */
 import React from 'react';
-import $ from 'jquery';
 import moment from 'moment';
 import axios from 'axios';
 import Info from './components/Info.jsx';
