@@ -1,13 +1,17 @@
+# node_modules
 node_modules
-public/dist/bundle.js
-db/dbconfig.js
-coverage/clover.xml
-coverage/lcov-report/index.html
-coverage
-db/psql/psql_bookings.csv
-db/psql/psql_rooms.csv
-db/cass/cass_bookings.csv
-db/cass/cass_rooms.csv
 
+# tests
+test/*
+
+# COVERAGE
+coverage/*
+
+# DATABASE FILES
+db/cass/*
+db/psql/*
+
+# NEW RELIC
 newrelic.js
+newrelicexample.js
 newrelic_agent.log
