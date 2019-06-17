@@ -1,7 +1,7 @@
 const db = require('../../db/index');
 
 const getAllBookings = (req, res) => {
-  const query = 'SELECT * FROM bookings where roomid = $1';
+  const query = 'SELECT checkin, checkout FROM bookings where roomid = $1';
   db.pool.query(query, [req.params.id], (err, result) => {
     if (err) {
       res.sendStatus(404);

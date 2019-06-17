@@ -19,6 +19,7 @@ app.get('/rooms/:id', (req, res) => {
 
 app.get('/api/rooms/:id/basicinfo', rooms.getRooms);
 app.get('/api/rooms/:id/bookings', bookings.getAllBookings);
+app.get('/api/rooms/:id', rooms.getAll);
 app.post('/api/rooms', rooms.addRoom);
 app.post('/api/bookings', bookings.addBooking);
 app.put('/api/rooms', rooms.updateRoom);

@@ -29,25 +29,27 @@ export default class App extends React.Component {
       rendering: true,
     };
 
-    this.getRoomData = this.getRoomData.bind(this);
     this.getBookingData = this.getBookingData.bind(this);
+    this.getData = this.getData.bind(this);
     this.updateRoomState = this.updateRoomState.bind(this);
     this.updateBookedDates = this.updateBookedDates.bind(this);
     this.handleRendering = this.handleRendering.bind(this);
-    this.initialize = this.initialize.bind(this);
   }
 
   componentDidMount() {
     const roomId = Number(window.location.pathname.split('/')[2]) || 1;
     this.setState({
       roomId,
-    }, this.initialize);
+    }, this.getData);
   }
 
-  getRoomData() {
+  getData() {
     const { roomId } = this.state;
-    axios.get(`/api/rooms/${roomId}/basicinfo`)
-      .then(result => this.updateRoomState(result.data))
+    axios.get(`/api/rooms/${roomId}`)
+      .then((result) => {
+        this.updateBookedDates(result.data);
+        this.updateRoomState(result.data[0]);
+      })
       .catch(err => console.log(err));
   }
 
@@ -58,11 +60,6 @@ export default class App extends React.Component {
         this.updateBookedDates(result.data);
       })
       .catch(err => console.log(err));
-  }
-
-  initialize() {
-    this.getRoomData();
-    this.getBookingData();
   }
 
   handleRendering() {
@@ -85,8 +82,11 @@ export default class App extends React.Component {
   }
 
   updateRoomState(result) {
+    const roomInfo = Object.assign({}, result);
+    delete roomInfo.checkin;
+    delete roomInfo.checkout;
     this.setState({
-      roomInfo: result,
+      roomInfo,
     });
   }
 
