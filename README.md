@@ -44,6 +44,7 @@ $ npm run start
 
 ### 1. GET
 
+
 > Rooms and Booking Information
 
 Endpoint: ```/api/rooms/:id```  
@@ -98,6 +99,7 @@ Endpoint: ```/api/rooms/:id```
 
 ### 2. POST
 
+
 > Creating a room record
 
 Endpoint: ```/rooms```
@@ -129,6 +131,7 @@ Example:
   * Code: 500
 
 
+
 > Creating a booking
 
 Endpoint: ```/bookings```
@@ -156,6 +159,7 @@ Example:
   * Code: 500 (Server Error)
 
 ### 3. PUT
+
 
 > Updating a room record
 
@@ -189,6 +193,7 @@ Example:
   * Code: 500
 
 
+
 > Updating a booking for a room
 
 Endpoint: ```/bookings```
@@ -218,6 +223,7 @@ Example:
 
 ### 4. DELETE
 
+
 > Deleting a room record
 
 Endpoint: ```rooms/:id```
@@ -227,6 +233,7 @@ Endpoint: ```rooms/:id```
 
 **Error Response:**
   * Code: 500
+
 
 > Deleting a booking record
 
