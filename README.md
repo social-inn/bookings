@@ -115,7 +115,7 @@ Endpoint: ```/api/rooms/:id```
 ```
 
 **Error Response**: 
-  * Response Code: 500
+  * Response Code: 404
 
 
 ### 2. POST
