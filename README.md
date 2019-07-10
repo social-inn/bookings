@@ -1,109 +1,113 @@
 # Social Inn Bookings
 
-> Module for booking a room on housing reservation website
+> Bookings module for a short-term housing reservation app
 
-## Related Projects
+## Table of Contents
 
-- https://github.com/social-inn/Recommeded-homes
-- https://github.com/social-inn/socialinn-proxy-eugenia
+* [How To Use](#how-to-use)
+* [Requirements](#requirements)
+* [RESTful API routes](#restful-api-routes)
+* [Related Projects](#related-projects)
 
-## Usage
+## How To Use
 
-```npm install``` to install necessary dependencies
+```bash
+# clone this repository
+$ git clone https://github.com/social-inn/bookings.git
 
-```npm run build``` to bundle webpack files
+# install dependencies
+$ npm install
 
-run ```mysql -u root < db_eugenia/schema.sql [-p]``` in CLI and enter password to create database
+# create and seed mysql database
+$ mysql -u root < db/schema.sql [-p]
 
-```npm start``` to start server running on port 3000
+# compile/transpile files with webpack
+$ npm run build
+
+# run the app!
+$ npm run start
+```
+
+## Requirements
+
+- [npm](http://npmjs.com)
+- [Node.js](https://nodejs.org/en/download/)
+- [Git](https://git-scm.com)
+
 
 ## RESTful API Routes
 
-1. [GET](#get)
-2. [POST](#post)
-3. [PUT](#put)
-4. [DELETE](#delete)
+1. [GET](#1-get)
+2. [POST](#2-post)
+3. [PUT](#3-put)
+4. [DELETE](#4-delete)
 
-## GET
+### 1. GET
 
-### Rooms
 
-Endpoint: ```/rooms/:id/basicinfo```  
+> Rooms and Booking Information
+
+Endpoint: ```/api/rooms/:id```  
 
 **Success Response**:
-  * An object containing information about a room with param ```id```
-  * Code: 200
+  * An array of objects containing basic room and booking information with param ```id```
+  * Response Code: 200
   * Expected Content:
-
-```sh
-{
-    "id": 1,
-    "roomname": "Alphonso Fahey's House",
-    "price": 1167,
-    "cleaningFee": 39,
-    "serviceFee": 127,
-    "maxAdults": 10,
-    "maxChildren": 4,
-    "maxInfants": 5,
-    "minNights": 7,
-    "maxNights": 49,
-    "ratings": 32,
-    "numReviews": 65,
-    "tax": 10,
-}
 
 ```
-**Error Response**: 
-  * Code: 500
-
-
-### Bookings
-
-Endpoint: ```/rooms/:id/bookings```
-
-**Success Response**: 
-  * An array of objects containing all the bookings for room with param ```id```. 
-  * Each object represents a booking that has been made for that room.
-  * Code: 200
-  * Expected Content:
-
- ```sh
 [
     {
-        "id": 1,
-        "email": "Allen.Satterfield16@yahoo.com",
-        "adults": 3,
-        "children": 1,
-        "infants": 0,
-        "checkIn": "2019-09-08",
-        "checkOut": "2019-09-11",
-        "roomId": 1
+        "id": 4,
+        "roomname": "Timmy Beatty Jr.'s Cute Flat FL 15270",
+        "price": 459,
+        "cleaningfee": 28,
+        "servicefee": 37,
+        "maxadults": 7,
+        "maxchildren": 3,
+        "maxinfants": 5,
+        "minnights": 7,
+        "maxnights": 28,
+        "ratings": 40,
+        "numreviews": 113,
+        "tax": 46,
+        "checkin": "2019-07-29T07:00:00.000Z",
+        "checkout": "2019-08-07T07:00:00.000Z"
     },
     {
-        "id": 2,
-        "email": "Kieran47@hotmail.com",
-        "adults": 3,
-        "children": 0,
-        "infants": 2,
-        "checkIn": "2019-09-13",
-        "checkOut": "2019-09-19",
-        "roomId": 1
-    },
+        "id": 4,
+        "roomname": "Timmy Beatty Jr.'s Cute Flat FL 15270",
+        "price": 459,
+        "cleaningfee": 28,
+        "servicefee": 37,
+        "maxadults": 7,
+        "maxchildren": 3,
+        "maxinfants": 5,
+        "minnights": 7,
+        "maxnights": 28,
+        "ratings": 40,
+        "numreviews": 113,
+        "tax": 46,
+        "checkin": "2019-09-13T07:00:00.000Z",
+        "checkout": "2019-09-15T07:00:00.000Z"
+    }
+]
+```
 
-``` 
 **Error Response**: 
-  * Code: 500
+  * Response Code: 500
 
-## POST
 
-### Creating a room record
+### 2. POST
+
+
+> Creating a room record
 
 Endpoint: ```/rooms```
 
-Expected Data Input: Object in application/json format
+Expected Input: Object in application/json format
 
 Example: 
-```sh
+```
 { 
     "roomname": 'My Nice Home',
     "price": 30,
@@ -127,14 +131,15 @@ Example:
   * Code: 500
 
 
-### Creating a booking
+
+> Creating a booking
 
 Endpoint: ```/bookings```
 
 Expected Data Input: Object in application/json format
 
 Example: 
-```sh
+```
 {
     "email": "Marquis_McClure@gmail.com",
     "adults": 2,
@@ -147,15 +152,16 @@ Example:
 ```
 
 **Success Response:**
-  * Code: 201
+  * Code: 201 (Successful booking made)
+  * Code: 202 (Booking Conflict, No bookings made)
 
 **Error Response:**
-  * Code: 403 (Booking Conflict)
   * Code: 500 (Server Error)
 
-## PUT
+### 3. PUT
 
-### Updating a room record
+
+> Updating a room record
 
 Endpoint: ```/rooms```
 
@@ -187,7 +193,8 @@ Example:
   * Code: 500
 
 
-### Updating a booking for a room
+
+> Updating a booking for a room
 
 Endpoint: ```/bookings```
 
@@ -214,9 +221,10 @@ Example:
   * Code: 409 (Booking Conflict, Cannot be amended)
   * Code: 500 (Server Error)
 
-## DELETE
+### 4. DELETE
 
-### Deleting a room record
+
+> Deleting a room record
 
 Endpoint: ```rooms/:id```
 
@@ -226,7 +234,8 @@ Endpoint: ```rooms/:id```
 **Error Response:**
   * Code: 500
 
-### Deleting a booking record
+
+> Deleting a booking record
 
 Endpoint: ```bookings/:id```
 
@@ -236,3 +245,8 @@ Endpoint: ```bookings/:id```
 **Error Response:**
   * Code: 500
 
+
+## Related Projects
+
+- https://github.com/social-inn/proxy
+- https://github.com/social-inn/recommended-homes
