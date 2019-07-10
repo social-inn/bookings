@@ -1,12 +1,12 @@
 const db = require('../../db/index');
 
 const getAll = (req, res) => {
-  const query = 'SELECT * FROM rooms INNER JOIN bookings ON rooms.id = bookings.roomid WHERE id = $1';
+  const query = 'SELECT * FROM rooms INNER JOIN bookings ON rooms.id = bookings.roomid WHERE rooms.id = $1';
   db.pool.query(query, [req.params.id], (err, result) => {
     if (err || result.rowCount === 0) {
       res.sendStatus(404);
     } else {
-      res.status(200).send(result.rows[0]);
+      res.status(200).send(result.rows);
     }
   });
 };
