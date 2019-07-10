@@ -4,10 +4,29 @@
 
 ## Table of Contents
 
+* [Stack](#stack)
+* [Demo](#demo)
 * [How To Use](#how-to-use)
 * [Requirements](#requirements)
 * [RESTful API routes](#restful-api-routes)
 * [Related Projects](#related-projects)
+
+## Stack
+
+Front-end: JavaScript, React, Webpack
+<br />
+Back-end: Node.js, Express
+<br />
+Database: PostgreSQL
+<br />
+Testing: Jest, Enzyme, CirceCI, k6, New Relic 
+
+## Demo
+
+<br />
+<p >
+    <img src="demo.gif?raw=true" height="400px"/>
+</p> 
 
 ## How To Use
 
@@ -23,6 +42,8 @@ $ mysql -u root < db/schema.sql [-p]
 
 # compile/transpile files with webpack
 $ npm run build
+
+# configure postgres connection to local settings >> db/index.js
 
 # run the app!
 $ npm run start
