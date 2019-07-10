@@ -305,10 +305,10 @@ export default class Form extends React.Component {
     let message = adultMessage;
 
     if (children !== 0) {
-      message += childrenMessage;
+      message += `, ${childrenMessage}`;
     }
     if (infants) {
-      message += infantMessage;
+      message += `, ${infantMessage}`;
     }
 
     return (

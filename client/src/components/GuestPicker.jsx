@@ -17,46 +17,46 @@ const GuestPicker = (props) => {
   } = props;
 
   return (
-      <div className={css.picker}>
-        <div>
-          <div className={css.guestType}>
-            Adults
-            <div className={css.buttonSection}>
-              <button type="submit" className={css.adults} id="adults" disabled={adults === 1} onClick={decreaseGuest}>- </button>
-              <div className={css.countAdults}>{adults}</div>
-              <button type="submit" className={css.adults} id="adults" disabled={adults === maxAdults} onClick={increaseGuest}> + </button>
-            </div>
+    <div className={css.picker}>
+      <div>
+        <div className={css.guestType}>
+          Adults
+          <div className={css.buttonSection}>
+            <button type="submit" className={css.adults} id="adults" disabled={adults === 1} onClick={decreaseGuest}>- </button>
+            <div className={css.countAdults}>{adults}</div>
+            <button type="submit" className={css.adults} id="adults" disabled={adults === maxAdults} onClick={increaseGuest}> + </button>
           </div>
-          <div />
-          <br />
-          <br />
-          <div className={css.guestType}>
-            Children
-            <div className={css.buttonSection}>
-              <button type="submit" className={css.children} id="children" disabled={numChildren === 0} onClick={decreaseGuest}>-</button>
-              <div className={css.count}>{numChildren}</div>
-              <button type="submit" className={css.children} id="children" disabled={numChildren === maxChildren} onClick={increaseGuest}>+</button>
-            </div>
-          </div>
-          <div className={css.guestTypeInfo}>Ages 2-12</div>
-          <br />
-          <div className={css.guestType}>
-            Infants
-            <div className={css.buttonSection}>
-              <button type="submit" className={css.infants} id="infants" disabled={infants === 0} onClick={decreaseGuest}>-</button>
-              <div className={css.count}>{infants}</div>
-              <button type="submit" className={css.infants} id="infants" disabled={infants === maxInfants} onClick={increaseGuest}>+</button>
-            </div>
-          </div>
-          <div className={css.guestTypeInfo}>Under 2</div>
         </div>
+        <div />
         <br />
-        <div>
-          {`${maxAdults} guest maximum. `}
-          {`${maxChildren} children and ${maxInfants} infants are allowed in this room.`}
+        <br />
+        <div className={css.guestType}>
+          Children
+          <div className={css.buttonSection}>
+            <button type="submit" className={css.children} id="children" disabled={numChildren === 0} onClick={decreaseGuest}>-</button>
+            <div className={css.count}>{numChildren}</div>
+            <button type="submit" className={css.children} id="children" disabled={numChildren === maxChildren} onClick={increaseGuest}>+</button>
+          </div>
         </div>
-        <button type="submit" className={css.close} onClick={guestExpandToggle}>Close</button>
+        <div className={css.guestTypeInfo}>Ages 2-12</div>
+        <br />
+        <div className={css.guestType}>
+          Infants
+          <div className={css.buttonSection}>
+            <button type="submit" className={css.infants} id="infants" disabled={infants === 0} onClick={decreaseGuest}>-</button>
+            <div className={css.count}>{infants}</div>
+            <button type="submit" className={css.infants} id="infants" disabled={infants === maxInfants} onClick={increaseGuest}>+</button>
+          </div>
+        </div>
+        <div className={css.guestTypeInfo}>Under 2</div>
       </div>
+      <br />
+      <div>
+        {`${maxAdults} guest maximum. `}
+        {`${maxChildren} children and ${maxInfants} infants are allowed in this room.`}
+      </div>
+      <button type="submit" className={css.close} onClick={guestExpandToggle}>Close</button>
+    </div>
   );
 };
 
