@@ -29,5 +29,5 @@ app.delete('/api/rooms/:id', rooms.deleteRoom);
 app.delete('api//bookings/:id', bookings.deleteBooking);
 
 app.listen(port, () => {
-  console.log(`Bookings proxy listening on port: ${port}`);
+  console.log(`Bookings server listening on port: ${port}`);
 });
